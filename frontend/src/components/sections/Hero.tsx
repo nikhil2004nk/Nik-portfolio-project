@@ -99,7 +99,7 @@ export function Hero() {
                 {/* Terminal Content */}
                 <pre className="font-mono text-sm text-primary whitespace-pre-wrap leading-loose">
                   {renderHighlightedText(typedText)}
-                  <span className="bg-signal w-2 h-4 inline-block ml-1 align-middle animate-[blink_530ms_step-end_infinite] shadow-[0_0_8px_rgba(0,240,255,0.8)]"></span>
+                  <span className="bg-signal w-1 h-4 inline-block ml-1 align-middle animate-[blink_530ms_step-end_infinite] shadow-[0_0_8px_rgba(0,240,255,0.8)]"></span>
                 </pre>
               </div>
             </div>
