@@ -6,23 +6,20 @@ import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 
 const renderHighlightedText = (text: string) => {
-  return text.split('\n').map((line, i) => {
-    let highlightedLine = line.replace(/"([^"]+)":/g, '<span className="text-muted">"$1":</span>');
-    highlightedLine = highlightedLine.replace(/: "([^"]+)"/g, ': <span className="text-signal">"$1"</span>');
-    highlightedLine = highlightedLine.replace(/"available"/g, '<span className="text-ledger">"available"</span>');
-    highlightedLine = highlightedLine.replace(/"React\.js"/g, '<span class="text-signal">"React.js"</span>');
-    highlightedLine = highlightedLine.replace(/"Next\.js"/g, '<span class="text-signal">"Next.js"</span>');
-    highlightedLine = highlightedLine.replace(/"NestJS"/g, '<span class="text-signal">"NestJS"</span>');
-    highlightedLine = highlightedLine.replace(/"MySQL"/g, '<span class="text-signal">"MySQL"</span>');
-    
-    if (line.startsWith('GET')) {
-      highlightedLine = '<span class="text-signal">GET</span> <span class="text-primary">/nikhil</span>';
-    } else if (line.startsWith('200 OK')) {
-      highlightedLine = '<span class="text-ledger">200 OK</span>';
-    }
-    
-    return <div key={i} dangerouslySetInnerHTML={{ __html: highlightedLine }} />;
-  });
+  let highlighted = text;
+  
+  highlighted = highlighted.replace(/"([^"]+)":/g, '<span class="text-muted">"$1":</span>');
+  highlighted = highlighted.replace(/: "([^"]+)"/g, ': <span class="text-signal">"$1"</span>');
+  highlighted = highlighted.replace(/"available"/g, '<span class="text-ledger">"available"</span>');
+  highlighted = highlighted.replace(/"React\.js"/g, '<span class="text-signal">"React.js"</span>');
+  highlighted = highlighted.replace(/"Next\.js"/g, '<span class="text-signal">"Next.js"</span>');
+  highlighted = highlighted.replace(/"NestJS"/g, '<span class="text-signal">"NestJS"</span>');
+  highlighted = highlighted.replace(/"MySQL"/g, '<span class="text-signal">"MySQL"</span>');
+  
+  highlighted = highlighted.replace(/GET \/nikhil/g, '<span class="text-signal">GET</span> <span class="text-primary">/nikhil</span>');
+  highlighted = highlighted.replace(/200 OK/g, '<span class="text-ledger">200 OK</span>');
+  
+  return <span dangerouslySetInnerHTML={{ __html: highlighted }} />;
 };
 
 export function Hero() {
@@ -101,7 +98,7 @@ export function Hero() {
                 
                 {/* Terminal Content */}
                 <pre className="font-mono text-sm text-primary whitespace-pre-wrap leading-loose">
-                  <div className="inline-block">{renderHighlightedText(typedText)}</div>
+                  {renderHighlightedText(typedText)}
                   <span className="bg-signal w-2 h-4 inline-block ml-1 align-middle animate-[blink_530ms_step-end_infinite] shadow-[0_0_8px_rgba(0,240,255,0.8)]"></span>
                 </pre>
               </div>
