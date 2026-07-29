@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { api } from '../../lib/api';
 import { Button } from '../ui/Button';
 import { ScrollReveal } from '../ui/ScrollReveal';
+import { Mail, Send } from 'lucide-react';
 
 export function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
@@ -30,15 +31,15 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24 lg:py-32 bg-ink border-t border-hairline">
+    <section id="contact" className="py-12 md:py-24 lg:py-32 bg-ink border-t border-hairline">
       <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-7xl">
         <ScrollReveal>
           <h2 className="text-sm font-mono text-muted mb-12">// 10 — Contact</h2>
         </ScrollReveal>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-start">
           <ScrollReveal>
-            <form onSubmit={handleSubmit} className="space-y-6 bg-panel p-8 rounded-lg border border-hairline">
+            <form onSubmit={handleSubmit} className="space-y-6 bg-panel p-5 sm:p-8 rounded-lg border border-hairline">
               {status === 'success' ? (
                 <div className="p-8 text-center animate-in fade-in duration-300">
                   <div className="w-16 h-16 bg-signal/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -88,11 +89,11 @@ export function Contact() {
                   {status === 'error' && (
                     <p className="text-alert text-sm font-mono animate-in fade-in slide-in-from-top-1">Failed to send message. Please try again.</p>
                   )}
-                  <Button type="submit" variant="primary" className="w-full h-12 flex items-center justify-center" disabled={status === 'loading'}>
+                  <Button type="submit" variant="primary" className="w-full h-12 flex items-center justify-center gap-2" disabled={status === 'loading'}>
                     {status === 'loading' ? (
                       <span className="animate-spin w-5 h-5 border-2 border-ink border-t-transparent rounded-full" />
                     ) : (
-                      'Send Message'
+                      <>Send Message <Send className="w-4 h-4" /></>
                     )}
                   </Button>
                 </>
@@ -102,7 +103,7 @@ export function Contact() {
 
           <ScrollReveal className="space-y-12">
             <div>
-              <h3 className="text-3xl font-display font-bold text-primary mb-6">Let's build something.</h3>
+              <h3 className="text-2xl md:text-3xl font-display font-bold text-primary mb-6">Let's build something.</h3>
               <p className="text-lg text-muted leading-relaxed mb-8">
                 I am currently available for freelance opportunities. Whether you need a robust backend API, an AI integration, or a complete full-stack platform—reach out.
               </p>
@@ -117,14 +118,18 @@ export function Contact() {
             </div>
 
             <div className="space-y-4 font-mono text-sm">
-              <a href="mailto:Nikdocuments12@gmail.com" className="flex items-center gap-4 text-primary hover:text-signal transition-colors p-4 bg-panel border border-hairline rounded-md">
-                <span className="text-muted w-24 uppercase">Email</span> Nikdocuments12@gmail.com
+              <a href="mailto:Nikdocuments12@gmail.com" className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-primary hover:text-signal transition-colors p-4 bg-panel border border-hairline rounded-md">
+                <span className="text-muted w-28 uppercase flex items-center gap-2"><Mail className="w-4 h-4" /> Email</span> Nikdocuments12@gmail.com
               </a>
-              <a href="https://github.com/nikhil2004nk" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-primary hover:text-signal transition-colors p-4 bg-panel border border-hairline rounded-md">
-                <span className="text-muted w-24 uppercase">GitHub</span> nikhil2004nk
+              <a href="https://github.com/nikhil2004nk" target="_blank" rel="noopener noreferrer" className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-primary hover:text-signal transition-colors p-4 bg-panel border border-hairline rounded-md">
+                <span className="text-muted w-28 uppercase flex items-center gap-2">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.18-.35 6.5-1.5 6.5-7.a4.6 4.6 0 0 0-1.2-3.2 4.4 4.4 0 0 0-.1-3.2s-1.1-.35-3.5 1.25a12 12 0 0 0-6 0C7.25 1.25 6.15 1.6 6.15 1.6a4.4 4.4 0 0 0-.1 3.2 4.6 4.6 0 0 0-1.2 3.2c0 5.5 3.32 6.65 6.5 7.02a4.8 4.8 0 0 0-1 3.02V22" /><path d="M9 20c-4.5 1.5-5-2.5-7-3" /></svg> GitHub
+                </span> nikhil2004nk
               </a>
-              <a href="https://www.linkedin.com/in/nikhil-kushwaha12/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-primary hover:text-signal transition-colors p-4 bg-panel border border-hairline rounded-md">
-                <span className="text-muted w-24 uppercase">LinkedIn</span> nikhil-kushwaha12
+              <a href="https://www.linkedin.com/in/nikhil-kushwaha12/" target="_blank" rel="noopener noreferrer" className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-primary hover:text-signal transition-colors p-4 bg-panel border border-hairline rounded-md">
+                <span className="text-muted w-28 uppercase flex items-center gap-2">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn
+                </span> nikhil-kushwaha12
               </a>
             </div>
           </ScrollReveal>
