@@ -7,7 +7,7 @@ export function Services() {
   const services = [
     {
       title: 'Backend Architecture',
-      description: 'Designing and building scalable, secure, and highly-available REST and GraphQL APIs using NestJS and Node.js.',
+      description: 'Designing and building scalable, secure backend systems and microservices using NestJS and Node.js.',
       icon: <Server className="w-8 h-8 text-signal mb-4" />
     },
     {
@@ -17,13 +17,8 @@ export function Services() {
     },
     {
       title: 'Database Design',
-      description: 'Structuring optimized relational and NoSQL databases using PostgreSQL, MongoDB, and Redis via Prisma ORM.',
+      description: 'Structuring optimized relational databases and analytical systems using MySQL, PostgreSQL, and ClickHouse.',
       icon: <Database className="w-8 h-8 text-signal mb-4" />
-    },
-    {
-      title: 'AI Integrations',
-      description: 'Implementing Retrieval-Augmented Generation (RAG) pipelines and LLM integrations using OpenAI and LangChain.',
-      icon: <Bot className="w-8 h-8 text-signal mb-4" />
     }
   ];
 

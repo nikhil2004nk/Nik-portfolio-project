@@ -22,8 +22,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Nik | Full Stack Developer",
-  description: "Portfolio of Nik, a full-stack developer specializing in Next.js, NestJS, and AI.",
+  title: "Nikhil Kushwaha | Full Stack Developer",
+  description: "Portfolio of Nikhil Kushwaha, a full-stack developer specializing in NestJS, React.js, Next.js, and fintech.",
 };
 
 export default function RootLayout({

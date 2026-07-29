@@ -1,7 +1,15 @@
+'use client';
+
 import * as React from 'react';
 import { ScrollReveal } from '../ui/ScrollReveal';
+import { Button } from '../ui/Button';
 
 export function Experience({ experience = [] }: { experience: any[] }) {
+  const [showAll, setShowAll] = React.useState(false);
+  const initialCount = 3;
+  const displayedExperience = showAll ? experience : experience.slice(0, initialCount);
+  const hasMore = experience.length > initialCount;
+
   return (
     <section id="experience" className="py-20 bg-panel border-y border-hairline">
       <div className="container mx-auto px-4 max-w-3xl">
@@ -10,7 +18,7 @@ export function Experience({ experience = [] }: { experience: any[] }) {
         </ScrollReveal>
         
         <div className="relative border-l border-hairline ml-3 space-y-12 pb-4">
-          {experience.map((job: any, index: number) => (
+          {displayedExperience.map((job: any, index: number) => (
             <ScrollReveal key={job.id} className="relative pl-8">
               {/* Timeline Node */}
               <div className="absolute -left-[5px] top-1.5 w-[9px] h-[9px] rounded-full bg-signal ring-4 ring-panel" />
@@ -37,6 +45,14 @@ export function Experience({ experience = [] }: { experience: any[] }) {
           ))}
           {experience.length === 0 && <p className="text-muted pl-8">No experience found.</p>}
         </div>
+        
+        {hasMore && (
+          <ScrollReveal className="mt-12 flex justify-center">
+            <Button variant="outline" onClick={() => setShowAll(!showAll)}>
+              {showAll ? 'Show Less' : `Show All (${experience.length})`}
+            </Button>
+          </ScrollReveal>
+        )}
       </div>
     </section>
   );

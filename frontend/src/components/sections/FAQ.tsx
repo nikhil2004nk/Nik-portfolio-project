@@ -11,15 +11,15 @@ export function FAQ() {
   const faqs = [
     {
       q: 'What is your typical tech stack?',
-      a: 'I primarily work with Next.js (React) for the frontend and NestJS (Node.js) for the backend, typically paired with PostgreSQL and Prisma ORM. I also frequently use Tailwind CSS for styling.'
+      a: 'I primarily work with React.js and Next.js for the frontend and NestJS for the backend, typically paired with MySQL or ClickHouse. I also frequently use Tailwind CSS for styling.'
     },
     {
       q: 'Do you take on freelance projects?',
       a: 'Yes! I am currently available for freelance opportunities. Use the contact form below to get in touch and we can discuss your project requirements.'
     },
     {
-      q: 'Can you integrate AI into my application?',
-      a: 'Absolutely. I have experience building RAG (Retrieval-Augmented Generation) pipelines and integrating LLMs from OpenAI into web applications to provide smart, context-aware features.'
+      q: 'Can you build secure fintech workflows?',
+      a: 'Absolutely. I have experience building secure KYC/KYB onboarding systems, payment workflows, and integrating various verification APIs for fintech platforms.'
     }
   ];
 

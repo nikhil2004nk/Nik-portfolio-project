@@ -8,10 +8,10 @@ const renderHighlightedText = (text: string) => {
     let highlightedLine = line.replace(/"([^"]+)":/g, '<span className="text-muted">"$1":</span>');
     highlightedLine = highlightedLine.replace(/: "([^"]+)"/g, ': <span className="text-signal">"$1"</span>');
     highlightedLine = highlightedLine.replace(/"available"/g, '<span className="text-ledger">"available"</span>');
+    highlightedLine = highlightedLine.replace(/"React\.js"/g, '<span class="text-signal">"React.js"</span>');
     highlightedLine = highlightedLine.replace(/"Next\.js"/g, '<span class="text-signal">"Next.js"</span>');
     highlightedLine = highlightedLine.replace(/"NestJS"/g, '<span class="text-signal">"NestJS"</span>');
-    highlightedLine = highlightedLine.replace(/"PostgreSQL"/g, '<span class="text-signal">"PostgreSQL"</span>');
-    highlightedLine = highlightedLine.replace(/"AI\/RAG"/g, '<span class="text-signal">"AI/RAG"</span>');
+    highlightedLine = highlightedLine.replace(/"MySQL"/g, '<span class="text-signal">"MySQL"</span>');
     
     if (line.startsWith('GET')) {
       highlightedLine = '<span class="text-signal">GET</span> <span class="text-primary">/nikhil</span>';
@@ -25,7 +25,7 @@ const renderHighlightedText = (text: string) => {
 
 export function Hero() {
   const [typedText, setTypedText] = React.useState('');
-  const terminalText = `GET /nikhil\n200 OK\n{\n  "role": "Full Stack Developer",\n  "stack": ["Next.js", "NestJS", "PostgreSQL", "AI/RAG"],\n  "status": "available"\n}`;
+  const terminalText = `GET /nikhil\n200 OK\n{\n  "role": "Full Stack Developer",\n  "stack": ["React.js", "Next.js", "NestJS", "MySQL"],\n  "status": "available"\n}`;
   const isTypingComplete = typedText.length >= terminalText.length;
 
   React.useEffect(() => {
@@ -60,8 +60,8 @@ export function Hero() {
               <span className="font-mono text-sm tracking-widest text-signal uppercase">Available for Freelance Projects</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-display font-bold text-primary mb-4 tracking-tight">Nikhil</h1>
-            <h2 className="text-xl md:text-2xl font-mono text-muted mb-6">Full Stack Developer (Next.js, NestJS, AI, FinTech)</h2>
+            <h1 className="text-5xl md:text-7xl font-display font-bold text-primary mb-4 tracking-tight">Nikhil Kushwaha</h1>
+            <h2 className="text-xl md:text-2xl font-mono text-muted mb-6">Full Stack Developer (React.js, Next.js, NestJS, MySQL)</h2>
             <p className="text-lg text-muted max-w-lg mb-10 leading-relaxed">
               Building scalable, high-performance platforms that process data, automate workflows, and drive business value.
             </p>

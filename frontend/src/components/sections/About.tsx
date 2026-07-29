@@ -13,19 +13,19 @@ export function About() {
           <ScrollReveal className="hidden lg:block">
             <div className="p-8 border border-hairline rounded-lg bg-panel">
               <h3 className="text-3xl font-display font-bold text-primary leading-tight mb-4">
-                3+ Years <br/>
-                <span className="text-muted">Fintech & AI Systems</span>
+                1 Year <br/>
+                <span className="text-muted">Fintech & Web Applications</span>
               </h3>
-              <p className="font-mono text-sm text-signal uppercase tracking-widest">Based in India</p>
+              <p className="font-mono text-sm text-signal uppercase tracking-widest">Based in Mumbai, Maharashtra</p>
             </div>
           </ScrollReveal>
           
           <ScrollReveal className="text-lg text-muted leading-relaxed space-y-6">
             <p>
-              I am a Full Stack Developer specializing in building scalable architectures and data-driven platforms. My focus is on creating robust backend systems using NestJS and PostgreSQL, paired with highly interactive and performant frontends built in Next.js and React.
+              I am a Full Stack Developer with 1 year of experience building fintech and web applications using NestJS, React.js, Next.js, TypeScript, and MySQL. I specialize in developing secure KYC/KYB onboarding systems, payment workflows, and scalable backend services.
             </p>
             <p>
-              Recently, my work has centered around the FinTech space—developing secure platforms that handle complex workflows—as well as integrating AI/LLMs to build Retrieval-Augmented Generation (RAG) pipelines for smart automation.
+              My focus is on delivering production-ready applications, implementing secure authentication systems, and collaborating across the full software development lifecycle. I have proven ability in creating responsive and optimized frontend interfaces and high-performance backend architectures.
             </p>
             <p className="text-primary font-medium">
               I believe in writing clean, maintainable code that directly solves business problems without unnecessary abstraction.

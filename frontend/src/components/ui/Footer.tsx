@@ -30,7 +30,7 @@ export function Footer() {
             <h4 className="font-mono text-sm text-primary mb-6 uppercase tracking-widest">Connect</h4>
             <ul className="space-y-3">
               <li><a href="https://github.com/nikhil2004nk" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-signal transition-colors">GitHub</a></li>
-              <li><a href="#" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-signal transition-colors">LinkedIn</a></li>
+              <li><a href="https://www.linkedin.com/in/nikhil-kushwaha12/" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-signal transition-colors">LinkedIn</a></li>
               <li><a href="#" className="text-muted hover:text-signal transition-colors flex items-center gap-2">Download Resume <span className="text-signal text-xs">PDF</span></a></li>
             </ul>
           </div>

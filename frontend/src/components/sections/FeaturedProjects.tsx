@@ -1,10 +1,18 @@
+'use client';
+
 import Link from 'next/link';
 import * as React from 'react';
 import { Card } from '../ui/Card';
 import { ScrollReveal } from '../ui/ScrollReveal';
 import { Badge } from '../ui/Badge';
+import { Button } from '../ui/Button';
 
 export function FeaturedProjects({ projects = [] }: { projects: any[] }) {
+  const [showAll, setShowAll] = React.useState(false);
+  const initialCount = 3;
+  const displayedProjects = showAll ? projects : projects.slice(0, initialCount);
+  const hasMore = projects.length > initialCount;
+
   return (
     <section id="projects" className="py-16 md:py-24 lg:py-32 bg-panel border-t border-hairline">
       <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-7xl">
@@ -12,7 +20,7 @@ export function FeaturedProjects({ projects = [] }: { projects: any[] }) {
           <h2 className="text-sm font-mono text-muted mb-12">// 03 — Featured Projects</h2>
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {projects.map((project: any, index: number) => {
+          {displayedProjects.map((project: any, index: number) => {
             const isHeroProject = index === 0;
             return (
               <ScrollReveal key={project.id} className={isHeroProject ? "md:col-span-2 lg:col-span-3" : ""}>
@@ -51,6 +59,14 @@ export function FeaturedProjects({ projects = [] }: { projects: any[] }) {
           })}
           {projects.length === 0 && <p className="text-muted">No projects found.</p>}
         </div>
+        
+        {hasMore && (
+          <ScrollReveal className="mt-12 flex justify-center">
+            <Button variant="outline" onClick={() => setShowAll(!showAll)}>
+              {showAll ? 'Show Less' : `View All Projects (${projects.length})`}
+            </Button>
+          </ScrollReveal>
+        )}
       </div>
     </section>
   );

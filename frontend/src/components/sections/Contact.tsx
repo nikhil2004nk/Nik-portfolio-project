@@ -117,14 +117,14 @@ export function Contact() {
             </div>
 
             <div className="space-y-4 font-mono text-sm">
-              <a href="mailto:contact@example.com" className="flex items-center gap-4 text-primary hover:text-signal transition-colors p-4 bg-panel border border-hairline rounded-md">
-                <span className="text-muted w-24 uppercase">Email</span> contact@example.com
+              <a href="mailto:Nikdocuments12@gmail.com" className="flex items-center gap-4 text-primary hover:text-signal transition-colors p-4 bg-panel border border-hairline rounded-md">
+                <span className="text-muted w-24 uppercase">Email</span> Nikdocuments12@gmail.com
               </a>
               <a href="https://github.com/nikhil2004nk" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-primary hover:text-signal transition-colors p-4 bg-panel border border-hairline rounded-md">
                 <span className="text-muted w-24 uppercase">GitHub</span> nikhil2004nk
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-primary hover:text-signal transition-colors p-4 bg-panel border border-hairline rounded-md">
-                <span className="text-muted w-24 uppercase">LinkedIn</span> Connect
+              <a href="https://www.linkedin.com/in/nikhil-kushwaha12/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-primary hover:text-signal transition-colors p-4 bg-panel border border-hairline rounded-md">
+                <span className="text-muted w-24 uppercase">LinkedIn</span> nikhil-kushwaha12
               </a>
             </div>
           </ScrollReveal>
