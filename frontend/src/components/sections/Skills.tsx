@@ -15,7 +15,7 @@ export function Skills({ skills = [] }: { skills: any[] }) {
         <ScrollReveal>
           <h2 className="text-sm font-mono text-muted mb-12">// 04 — Core Competencies</h2>
         </ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {Object.entries(groupedSkills).map(([category, items]: [string, any]) => (
             <ScrollReveal key={category}>
               <div key={category}>

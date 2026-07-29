@@ -33,7 +33,7 @@ export function Services() {
         <ScrollReveal>
           <h2 className="text-sm font-mono text-muted mb-12">// 02 — Services</h2>
         </ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {services.map((service, index) => (
             <ScrollReveal key={index}>
               <Card className="p-8 hover:border-signal transition-colors">

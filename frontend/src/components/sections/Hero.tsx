@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 
 const renderHighlightedText = (text: string) => {
   return text.split('\n').map((line, i) => {
-    let highlightedLine = line.replace(/"([^"]+)":/g, '<span class="text-muted">"$1":</span>');
-    highlightedLine = highlightedLine.replace(/: "([^"]+)"/g, ': <span class="text-signal">"$1"</span>');
-    highlightedLine = highlightedLine.replace(/"available"/g, '<span class="text-ledger">"available"</span>');
+    let highlightedLine = line.replace(/"([^"]+)":/g, '<span className="text-muted">"$1":</span>');
+    highlightedLine = highlightedLine.replace(/: "([^"]+)"/g, ': <span className="text-signal">"$1"</span>');
+    highlightedLine = highlightedLine.replace(/"available"/g, '<span className="text-ledger">"available"</span>');
     highlightedLine = highlightedLine.replace(/"Next\.js"/g, '<span class="text-signal">"Next.js"</span>');
     highlightedLine = highlightedLine.replace(/"NestJS"/g, '<span class="text-signal">"NestJS"</span>');
     highlightedLine = highlightedLine.replace(/"PostgreSQL"/g, '<span class="text-signal">"PostgreSQL"</span>');
@@ -49,7 +49,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isTypingComplete ? 1 : 0, y: isTypingComplete ? 0 : 20 }}
-            transition={{ duration: 0.5, ease: 'easeOut', staggerChildren: 0.2 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.2 }}
             className="order-2 md:order-1"
           >
             <div className="flex items-center gap-3 mb-6">
@@ -83,7 +83,7 @@ export function Hero() {
             </div>
             <pre className="font-mono text-sm text-primary whitespace-pre-wrap leading-relaxed">
               <div className="inline-block">{renderHighlightedText(typedText)}</div>
-              <span className="animate-pulse bg-signal w-2 h-4 inline-block ml-1 align-middle"></span>
+              <span className="bg-signal w-2 h-4 inline-block ml-1 align-middle animate-[blink_530ms_step-end_infinite]"></span>
             </pre>
           </div>
         </div>

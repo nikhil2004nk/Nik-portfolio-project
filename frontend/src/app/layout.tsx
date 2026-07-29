@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, IBM_Plex_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "../components/layout/ThemeProvider";
-import { Navbar } from "../components/layout/Navbar";
-import { Footer } from "../components/layout/Footer";
+import { Navbar } from "../components/ui/Navbar";
+import { Footer } from "../components/ui/Footer";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({

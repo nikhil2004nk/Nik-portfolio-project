@@ -1,24 +1,49 @@
 import * as React from 'react';
+import { ScrollReveal } from '../ui/ScrollReveal';
 
 export function FreelanceProcess() {
   const steps = [
-    { num: '01', title: 'Discovery', desc: 'Understanding your business goals, target audience, and technical requirements.' },
-    { num: '02', title: 'Architecture', desc: 'Designing the database schema, API structure, and choosing the right tech stack.' },
-    { num: '03', title: 'Development', desc: 'Writing clean, testable code with regular progress updates and continuous integration.' },
-    { num: '04', title: 'Deployment', desc: 'Setting up CI/CD pipelines, cloud hosting, and monitoring for a smooth launch.' },
+    { name: 'Discovery', desc: 'Understanding your goals and requirements.' },
+    { name: 'Proposal', desc: 'Detailed scope, timeline, and architecture.' },
+    { name: 'Design', desc: 'System architecture and UI/UX design.' },
+    { name: 'Development', desc: 'Iterative, test-driven implementation.' },
+    { name: 'Review', desc: 'Staging deployment and client feedback.' },
+    { name: 'Launch', desc: 'Production deployment and handoff.' },
   ];
 
   return (
-    <section id="process" className="py-20 border-t border-hairline">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <h2 className="text-sm font-mono text-muted mb-12">// 08 — Freelance Process</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
-            <div key={index} className="relative">
-              <div className="text-4xl font-display font-bold text-hairline mb-4">{step.num}</div>
-              <h3 className="text-lg font-bold text-primary mb-2">{step.title}</h3>
-              <p className="text-sm text-muted">{step.desc}</p>
-            </div>
+    <section id="process" className="py-16 md:py-24 lg:py-32 bg-ink border-t border-hairline">
+      <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-7xl">
+        <ScrollReveal>
+          <h2 className="text-sm font-mono text-muted mb-12">// 08 — Freelance Process</h2>
+        </ScrollReveal>
+        
+        {/* Mobile / Tablet Vertical List */}
+        <div className="lg:hidden space-y-8">
+          {steps.map((step, i) => (
+            <ScrollReveal key={i} className="flex gap-6">
+              <span className="font-mono text-3xl font-bold text-ledger">0{i + 1}</span>
+              <div>
+                <h3 className="font-display text-xl font-bold text-primary mb-1">{step.name}</h3>
+                <p className="text-muted">{step.desc}</p>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+
+        {/* Desktop Horizontal Stepper */}
+        <div className="hidden lg:grid grid-cols-6 gap-4 relative">
+          <div className="absolute top-5 left-8 right-8 h-px bg-hairline -z-10" />
+          {steps.map((step, i) => (
+            <ScrollReveal key={i} className="relative pt-2">
+              <div className="bg-ink inline-block pr-4 mb-4">
+                <span className="font-mono text-3xl font-bold text-ledger bg-panel border border-hairline w-12 h-12 flex items-center justify-center rounded-full">
+                  {i + 1}
+                </span>
+              </div>
+              <h3 className="font-display text-lg font-bold text-primary mb-2">{step.name}</h3>
+              <p className="text-muted text-sm leading-relaxed pr-4">{step.desc}</p>
+            </ScrollReveal>
           ))}
         </div>
       </div>
