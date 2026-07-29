@@ -7,6 +7,7 @@
 
   --color-ink: var(--bg-ink);
   --color-panel: var(--bg-panel);
+  --color-panel-raised: var(--bg-panel-raised);
   --color-hairline: var(--border-hairline);
   --color-signal: var(--accent-signal);
   --color-ledger: var(--accent-ledger);
@@ -17,18 +18,20 @@
 
 :root {
   --bg-ink: #F6F7FB;
-  --bg-panel: #ffffff;
-  --border-hairline: #e2e4ec;
-  --accent-signal: #2db3a3;
-  --accent-ledger: #d99a2c;
-  --accent-alert: #e54c4c;
-  --text-primary: #1a1f2e;
-  --text-muted: #6b7280;
+  --bg-panel: #FFFFFF;
+  --bg-panel-raised: #F0F2F8;
+  --border-hairline: #DFE3ED;
+  --accent-signal: #0FA99C;
+  --accent-ledger: #C6870F;
+  --accent-alert: #E24C4C;
+  --text-primary: #101726;
+  --text-muted: #5B6478;
 }
 
 .dark {
   --bg-ink: #0B1220;
   --bg-panel: #121B2E;
+  --bg-panel-raised: #182240;
   --border-hairline: #232E47;
   --accent-signal: #3ED9C4;
   --accent-ledger: #F2B84B;
@@ -40,5 +43,5 @@
 body {
   background: var(--bg-ink);
   color: var(--text-primary);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-body), sans-serif;
 }

@@ -10,4 +10,8 @@ export class ProjectsService {
       orderBy: { order: "asc" }
     });
   }
+
+  findBySlug(slug: string) {
+    return this.prisma.project.findUnique({ where: { slug } });
+  }
 }

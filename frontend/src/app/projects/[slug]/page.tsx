@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/Badge';
-import { ArrowLeft, Github, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Code, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 async function getProject(slug: string) {
@@ -38,7 +38,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         <div className="flex gap-4 mb-16">
           {project.githubUrl && (
             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-primary hover:text-signal transition-colors font-mono text-sm">
-              <Github className="w-4 h-4" /> View Source
+              <Code className="w-4 h-4" /> View Source
             </a>
           )}
           {project.liveUrl && (
