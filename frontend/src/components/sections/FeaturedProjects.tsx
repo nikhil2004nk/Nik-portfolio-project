@@ -10,7 +10,7 @@ import { FolderGit2, ArrowRight } from 'lucide-react';
 
 export function FeaturedProjects({ projects = [] }: { projects: any[] }) {
   const [showAll, setShowAll] = React.useState(false);
-  const initialCount = 3;
+  const initialCount = 4;
   const displayedProjects = showAll ? projects : projects.slice(0, initialCount);
   const hasMore = projects.length > initialCount;
 
@@ -27,7 +27,7 @@ export function FeaturedProjects({ projects = [] }: { projects: any[] }) {
             <div className="h-px flex-1 bg-gradient-to-r from-hairline to-transparent" />
           </div>
         </ScrollReveal>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {displayedProjects.map((project: any, index: number) => {
             const isHeroProject = index === 0;
@@ -35,7 +35,7 @@ export function FeaturedProjects({ projects = [] }: { projects: any[] }) {
               <ScrollReveal key={project.id} className={isHeroProject ? "md:col-span-2 lg:col-span-3" : ""}>
                 <Card className={`glass-card p-5 md:p-6 flex flex-col h-full relative overflow-hidden group hover:-translate-y-2 hover:border-signal/50 hover:shadow-[0_8px_32px_rgba(0,240,255,0.15)] transition-all duration-500 ease-out ${isHeroProject ? 'lg:flex-row lg:items-center lg:gap-12 md:p-8 lg:p-10' : ''}`}>
                   <div className="absolute inset-0 bg-gradient-to-br from-signal/5 via-transparent to-ledger/5 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out pointer-events-none" />
-                  
+
                   <div className={`flex-1 relative z-10 ${isHeroProject ? 'lg:max-w-xl' : ''}`}>
                     <Link href={`/projects/${project.slug}`} className="inline-block group/link mb-4">
                       <h3 className={`font-display font-bold text-primary group-hover/link:text-transparent group-hover/link:bg-clip-text group-hover/link:bg-gradient-to-r group-hover/link:from-signal group-hover/link:to-ledger transition-all duration-300 flex items-center gap-3 ${isHeroProject ? 'text-2xl md:text-3xl lg:text-4xl' : 'text-xl md:text-2xl'}`}>
@@ -57,12 +57,12 @@ export function FeaturedProjects({ projects = [] }: { projects: any[] }) {
                       </Link>
                     </div>
                   </div>
-                  
+
                   {isHeroProject && (
                     <div className="hidden lg:block flex-1 h-full min-h-[350px] bg-ink/50 backdrop-blur-sm rounded-xl border border-hairline relative overflow-hidden group-hover:border-signal/40 transition-colors shadow-inner">
                       {/* Placeholder for project screenshot */}
                       <div className="absolute inset-0 flex items-center justify-center text-muted font-mono text-sm opacity-50">// system_screenshot.jpg</div>
-                      
+
                       {/* Decorative accents */}
                       <div className="absolute top-4 left-4 flex gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-full bg-hairline"></div>
@@ -77,7 +77,7 @@ export function FeaturedProjects({ projects = [] }: { projects: any[] }) {
           })}
           {projects.length === 0 && <p className="text-muted">No projects found.</p>}
         </div>
-        
+
         {hasMore && (
           <ScrollReveal className="mt-16 flex justify-center">
             <Button variant="secondary" onClick={() => setShowAll(!showAll)}>
