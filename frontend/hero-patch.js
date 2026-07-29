@@ -1,17 +1,23 @@
-'use client';
+const fs = require('fs');
+const path = require('path');
+
+const srcDir = path.join(__dirname, 'src');
+const heroPath = path.join(srcDir, 'components', 'sections', 'Hero.tsx');
+
+const heroContent = `'use client';
 import * as React from 'react';
 import { Button } from '../ui/Button';
 import { motion } from 'framer-motion';
 
 const renderHighlightedText = (text: string) => {
-  return text.split('\n').map((line, i) => {
+  return text.split('\\n').map((line, i) => {
     let highlightedLine = line.replace(/"([^"]+)":/g, '<span class="text-muted">"$1":</span>');
     highlightedLine = highlightedLine.replace(/: "([^"]+)"/g, ': <span class="text-signal">"$1"</span>');
     highlightedLine = highlightedLine.replace(/"available"/g, '<span class="text-ledger">"available"</span>');
-    highlightedLine = highlightedLine.replace(/"Next\.js"/g, '<span class="text-signal">"Next.js"</span>');
+    highlightedLine = highlightedLine.replace(/"Next\\.js"/g, '<span class="text-signal">"Next.js"</span>');
     highlightedLine = highlightedLine.replace(/"NestJS"/g, '<span class="text-signal">"NestJS"</span>');
     highlightedLine = highlightedLine.replace(/"PostgreSQL"/g, '<span class="text-signal">"PostgreSQL"</span>');
-    highlightedLine = highlightedLine.replace(/"AI\/RAG"/g, '<span class="text-signal">"AI/RAG"</span>');
+    highlightedLine = highlightedLine.replace(/"AI\\/RAG"/g, '<span class="text-signal">"AI/RAG"</span>');
     
     if (line.startsWith('GET')) {
       highlightedLine = '<span class="text-signal">GET</span> <span class="text-primary">/nikhil</span>';
@@ -25,7 +31,7 @@ const renderHighlightedText = (text: string) => {
 
 export function Hero() {
   const [typedText, setTypedText] = React.useState('');
-  const terminalText = `GET /nikhil\n200 OK\n{\n  "role": "Full Stack Developer",\n  "stack": ["Next.js", "NestJS", "PostgreSQL", "AI/RAG"],\n  "status": "available"\n}`;
+  const terminalText = \`GET /nikhil\\n200 OK\\n{\\n  "role": "Full Stack Developer",\\n  "stack": ["Next.js", "NestJS", "PostgreSQL", "AI/RAG"],\\n  "status": "available"\\n}\`;
   const isTypingComplete = typedText.length >= terminalText.length;
 
   React.useEffect(() => {
@@ -91,3 +97,7 @@ export function Hero() {
     </section>
   );
 }
+`;
+
+fs.writeFileSync(heroPath, heroContent);
+console.log('Hero patched successfully!');
