@@ -24,7 +24,7 @@ export const adminApi = {
     return res.json();
   },
   
-  getProjects: () => api.getProjects(),
+  getProjects: () => fetch(`${API_URL}/projects`, { credentials: 'include' }).then(r => r.json()),
   
   createProject: async (data: any) => {
     const res = await fetch(`${API_URL}/projects`, {
