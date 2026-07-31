@@ -20,7 +20,7 @@ async function bootstrap() {
   app.use(compression());
   app.use(cookieParser());
   app.enableCors({
-    origin: '*', // Configure this for production
+    origin: process.env.FRONTEND_ORIGIN || 'http://localhost:3000',
     credentials: true,
   });
 

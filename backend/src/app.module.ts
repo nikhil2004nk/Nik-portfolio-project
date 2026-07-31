@@ -11,6 +11,18 @@ import { ProjectModule } from './project/project.module';
 import { SkillModule } from './skill/skill.module';
 import { AuthModule } from './auth/auth.module';
 import { PortfolioModule } from './portfolio/portfolio.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { CategoryModule } from './category/category.module';
+import { CertificationModule } from './certification/certification.module';
+import { ContactMessageModule } from './contact-message/contact-message.module';
+import { EducationModule } from './education/education.module';
+import { ExperienceModule } from './experience/experience.module';
+import { ServiceModule } from './service/service.module';
+import { SocialModule } from './social/social.module';
+import { TagModule } from './tag/tag.module';
+import { TechnologyModule } from './technology/technology.module';
+import { TestimonialModule } from './testimonial/testimonial.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -22,7 +34,18 @@ import { PortfolioModule } from './portfolio/portfolio.module';
     ProjectModule,
     SkillModule,
     PortfolioModule,
-    // Add other modules here later
+    DashboardModule,
+    CategoryModule,
+    CertificationModule,
+    ContactMessageModule,
+    EducationModule,
+    ExperienceModule,
+    ServiceModule,
+    SocialModule,
+    TagModule,
+    TechnologyModule,
+    TestimonialModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [AppService],

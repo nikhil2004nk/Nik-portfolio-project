@@ -14,6 +14,7 @@ export interface Profile extends BaseEntity {
   coverImage: string | null;
   email: string | null;
   location: string | null;
+  yearsExperience: number;
 }
 
 export interface Social extends BaseEntity {

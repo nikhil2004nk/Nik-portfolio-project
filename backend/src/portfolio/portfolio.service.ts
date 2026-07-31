@@ -1,18 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import type { Cache } from 'cache-manager';
-import { ProfileService } from '../profile/profile.service';
-import { ProjectService } from '../project/project.service';
-import { SkillService } from '../skill/skill.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class PortfolioService {
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
-    private profileService: ProfileService,
-    private projectService: ProjectService,
-    private skillService: SkillService,
-    // Inject others...
+    private prisma: PrismaService,
   ) {}
 
   async getPortfolio() {
@@ -23,22 +18,39 @@ export class PortfolioService {
       return cachedData;
     }
 
-    const [profile, featuredProjects, skills] = await Promise.all([
-      this.profileService.find(),
-      this.projectService.getFeatured(),
-      this.skillService.findAll(),
+    // Fetch everything concurrently via Prisma
+    const [
+      profile,
+      featuredProjects,
+      skills,
+      socials,
+      services,
+      experience,
+      education,
+      certifications,
+      testimonials
+    ] = await Promise.all([
+      this.prisma.profile.findFirst(),
+      this.prisma.project.findMany({ where: { published: true } }), // Get all published for now
+      this.prisma.skill.findMany({ orderBy: { order: 'asc' } }),
+      this.prisma.social.findMany({ where: { visible: true }, orderBy: { order: 'asc' } }),
+      this.prisma.service.findMany({ orderBy: { order: 'asc' } }),
+      this.prisma.experience.findMany({ include: { achievements: true }, orderBy: { order: 'asc' } }),
+      this.prisma.education.findMany({ orderBy: { order: 'asc' } }),
+      this.prisma.certification.findMany({ where: { published: true }, orderBy: { order: 'asc' } }),
+      this.prisma.testimonial.findMany({ where: { published: true }, orderBy: { order: 'asc' } }),
     ]);
 
     const data = {
       profile,
       featuredProjects,
       skills,
-      socials: [],
-      services: [],
-      experience: [],
-      education: [],
-      certifications: [],
-      testimonials: [],
+      socials,
+      services,
+      experience,
+      education,
+      certifications,
+      testimonials,
     };
 
     // Cache for 60 seconds

@@ -19,10 +19,10 @@ export function AboutSection({ profile }: AboutSectionProps) {
           <ScrollReveal className="hidden lg:block">
             <div className="p-8 border border-hairline rounded-lg bg-panel">
               <h3 className="text-2xl md:text-3xl font-display font-bold text-primary leading-tight mb-4">
-                1 Year <br/>
-                <span className="text-muted">Fintech & Web Applications</span>
+                {profile?.yearsExperience || 1} {profile?.yearsExperience === 1 ? 'Year' : 'Years'} <br/>
+                <span className="text-muted">{profile?.headline || 'Web Applications'}</span>
               </h3>
-              <p className="font-mono text-sm text-signal uppercase tracking-widest">Based in Mumbai, Maharashtra</p>
+              <p className="font-mono text-sm text-signal uppercase tracking-widest">Based in {profile?.location || 'Mumbai'}</p>
             </div>
           </ScrollReveal>
           

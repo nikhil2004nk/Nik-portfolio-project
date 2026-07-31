@@ -14,7 +14,7 @@ async function getData() {
   try {
     const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/v1';
     
-    const res = await fetch(`${API_BASE}/portfolio`, { next: { revalidate: 3600 } });
+    const res = await fetch(`${API_BASE}/portfolio`, { next: { revalidate: 0 } });
     if (!res.ok) throw new Error('Failed to fetch portfolio data');
     const json = await res.json();
     return json.data;

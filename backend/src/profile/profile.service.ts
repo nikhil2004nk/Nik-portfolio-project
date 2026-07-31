@@ -21,9 +21,13 @@ export class ProfileService {
 
   async update(data: any) {
     const profile = await this.find();
+    
+    // Remove read-only fields that might be passed from the frontend form
+    const { id, createdAt, updatedAt, ...updateData } = data;
+    
     return this.prisma.profile.update({
       where: { id: profile.id },
-      data,
+      data: updateData,
     });
   }
 }

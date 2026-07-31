@@ -61,20 +61,24 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.2 }}
             className="order-2 md:order-1"
           >
-            <div className="inline-flex items-center gap-3 mb-8 px-4 py-2 glass-panel rounded-full border border-hairline">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-signal opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-signal"></span>
-              </span>
-              <span className="font-mono text-xs tracking-widest text-primary uppercase">Available for Hire</span>
-            </div>
+            {(profile?.freelanceAvailable || profile?.remoteAvailable) && (
+              <div className="inline-flex items-center gap-3 mb-8 px-4 py-2 glass-panel rounded-full border border-hairline">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-signal opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-signal"></span>
+                </span>
+                <span className="font-mono text-xs tracking-widest text-primary uppercase">
+                  Available for {profile.freelanceAvailable && profile.remoteAvailable ? 'Freelance & Remote' : profile.freelanceAvailable ? 'Freelance' : 'Remote'}
+                </span>
+              </div>
+            )}
             
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-display font-bold text-primary mb-4 tracking-tighter">
-              <span className="text-gradient">Nikhil</span> Kushwaha
+              <span className="text-gradient">{profile?.name || 'Nikhil Kushwaha'}</span>
             </h1>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-mono text-muted mb-8 font-light">Full Stack Developer</h2>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-mono text-muted mb-8 font-light">{profile?.headline || 'Full Stack Developer'}</h2>
             <p className="text-base md:text-lg text-muted max-w-lg mb-10 leading-relaxed font-light">
-              Crafting premium, highly-performant web applications using modern architectures. Specializing in NestJS, React, and seamless user experiences.
+              {profile?.bio || 'Crafting premium, highly-performant web applications using modern architectures.'}
             </p>
             
             <div className="flex flex-wrap gap-4">
