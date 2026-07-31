@@ -1,7 +1,13 @@
 import * as React from 'react';
 import { ScrollReveal } from '../ui/ScrollReveal';
 
-export function About() {
+import { Profile } from '../../types/profile';
+
+interface AboutSectionProps {
+  profile: Profile | null;
+}
+
+export function AboutSection({ profile }: AboutSectionProps) {
   return (
     <section id="about" className="py-12 md:py-24 lg:py-32 bg-ink">
       <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-7xl">
@@ -36,3 +42,4 @@ export function About() {
     </section>
   );
 }
+

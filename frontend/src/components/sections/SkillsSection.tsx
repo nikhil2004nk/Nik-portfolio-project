@@ -2,10 +2,17 @@ import * as React from 'react';
 import { Badge } from '../ui/Badge';
 import { ScrollReveal } from '../ui/ScrollReveal';
 
-export function Skills({ skills = [] }: { skills: any[] }) {
-  const groupedSkills = skills.reduce((acc: any, skill: any) => {
-    acc[skill.category] = acc[skill.category] || [];
-    acc[skill.category].push(skill.name);
+import { Skill } from '../../types/skill';
+
+interface SkillsSectionProps {
+  skills: Skill[];
+}
+
+export function SkillsSection({ skills = [] }: SkillsSectionProps) {
+  const groupedSkills = skills.reduce((acc: any, skill: Skill) => {
+    const catName = skill.category?.name || 'Other';
+    acc[catName] = acc[catName] || [];
+    acc[catName].push(skill.name);
     return acc;
   }, {});
 

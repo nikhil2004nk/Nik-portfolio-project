@@ -3,25 +3,13 @@ import { Card } from '../ui/Card';
 import { Server, Layout, Database, Bot } from 'lucide-react';
 import { ScrollReveal } from '../ui/ScrollReveal';
 
-export function Services() {
-  const services = [
-    {
-      title: 'Backend Architecture',
-      description: 'Designing and building scalable, secure backend systems and microservices using NestJS and Node.js.',
-      icon: <Server className="w-8 h-8 text-signal mb-4" />
-    },
-    {
-      title: 'Frontend Development',
-      description: 'Crafting responsive, accessible, and highly interactive user interfaces with React, Next.js, and Tailwind CSS.',
-      icon: <Layout className="w-8 h-8 text-signal mb-4" />
-    },
-    {
-      title: 'Database Design',
-      description: 'Structuring optimized relational databases and analytical systems using MySQL, PostgreSQL, and ClickHouse.',
-      icon: <Database className="w-8 h-8 text-signal mb-4" />
-    }
-  ];
+import { Service } from '../../types/service';
 
+interface ServicesSectionProps {
+  services: Service[];
+}
+
+export function ServicesSection({ services }: ServicesSectionProps) {
   return (
     <section id="services" className="py-20 bg-panel border-t border-hairline">
       <div className="container mx-auto px-4 max-w-5xl">
@@ -43,3 +31,4 @@ export function Services() {
     </section>
   );
 }
+

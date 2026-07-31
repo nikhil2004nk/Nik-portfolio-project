@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ScrollReveal } from '../ui/ScrollReveal';
 
-export function FreelanceProcess() {
+export function FreelanceProcessSection() {
   const steps = [
     { name: 'Discovery', desc: 'Understanding your goals and requirements.' },
     { name: 'Proposal', desc: 'Detailed scope, timeline, and architecture.' },
@@ -50,3 +50,4 @@ export function FreelanceProcess() {
     </section>
   );
 }
+

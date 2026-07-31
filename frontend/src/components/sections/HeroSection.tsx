@@ -22,7 +22,14 @@ const renderHighlightedText = (text: string) => {
   return <span dangerouslySetInnerHTML={{ __html: highlighted }} />;
 };
 
-export function Hero() {
+import { Profile, Social } from '../../types/profile';
+
+interface HeroSectionProps {
+  profile: Profile | null;
+  socials: Social[];
+}
+
+export function HeroSection({ profile, socials }: HeroSectionProps) {
   const [typedText, setTypedText] = React.useState('');
   const terminalText = `GET /nikhil\n200 OK\n{\n  "role": "Full Stack Developer",\n  "stack": ["React.js", "Next.js", "NestJS", "MySQL"],\n  "status": "available"\n}`;
   const isTypingComplete = typedText.length >= terminalText.length;
@@ -110,3 +117,4 @@ export function Hero() {
     </section>
   );
 }
+

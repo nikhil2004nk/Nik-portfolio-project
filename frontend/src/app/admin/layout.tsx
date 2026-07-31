@@ -3,8 +3,9 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { adminApi } from '../../lib/admin-api';
-import { LayoutDashboard, LogOut, FolderGit2, Code2, Briefcase, GraduationCap, Award, MessageSquare } from 'lucide-react';
+import { authService } from '../../features/auth/services/auth.service';
+import { LogOut } from 'lucide-react';
+import { ADMIN_NAV_ITEMS } from '../../constants/navigation';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -16,22 +17,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogout = async () => {
     try {
-      await adminApi.logout();
+      await authService.logout();
       router.push('/admin/login');
     } catch (e) {
       console.error(e);
     }
   };
-
-  const navItems = [
-    { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-    { name: 'Projects', href: '/admin/projects', icon: FolderGit2 },
-    { name: 'Skills', href: '/admin/skills', icon: Code2 },
-    { name: 'Experience', href: '/admin/experience', icon: Briefcase },
-    { name: 'Education', href: '/admin/education', icon: GraduationCap },
-    { name: 'Certifications', href: '/admin/certifications', icon: Award },
-    { name: 'Messages', href: '/admin/messages', icon: MessageSquare },
-  ];
 
   return (
     <div className="min-h-screen bg-ink text-primary flex">
@@ -41,7 +32,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <h2 className="text-xl font-display font-bold text-signal">Admin Panel</h2>
         </div>
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-          {navItems.map((item) => {
+          {ADMIN_NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link

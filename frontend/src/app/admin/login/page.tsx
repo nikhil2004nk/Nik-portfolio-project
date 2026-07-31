@@ -3,28 +3,39 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { adminApi } from '../../../lib/admin-api';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { authService } from '../../../features/auth/services/auth.service';
 import { Button } from '../../../components/ui/Button';
 
+const loginSchema = z.object({
+  email: z.string().email('Please enter a valid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+});
+
+type LoginFormData = z.infer<typeof loginSchema>;
+
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = async (data: LoginFormData) => {
     setError('');
 
     try {
-      await adminApi.login({ email, password });
+      await authService.login(data);
       router.push('/admin');
     } catch (err: any) {
-      setError('Invalid credentials');
-    } finally {
-      setLoading(false);
+      setError(err.message || 'Invalid credentials');
     }
   };
 
@@ -36,26 +47,28 @@ export default function LoginPage() {
           <p className="text-sm font-mono text-muted">// restricted access</p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
             <label className="block text-xs font-mono text-muted mb-2 uppercase">Email</label>
             <input
               type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              {...register('email')}
               className="w-full bg-ink border border-hairline rounded-md px-4 py-3 text-primary focus:outline-none focus:ring-2 focus:ring-signal focus:border-signal transition-all duration-150"
             />
+            {errors.email && (
+              <p className="mt-2 text-xs text-alert font-mono">{errors.email.message}</p>
+            )}
           </div>
           <div>
             <label className="block text-xs font-mono text-muted mb-2 uppercase">Password</label>
             <input
               type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              {...register('password')}
               className="w-full bg-ink border border-hairline rounded-md px-4 py-3 text-primary focus:outline-none focus:ring-2 focus:ring-signal focus:border-signal transition-all duration-150"
             />
+            {errors.password && (
+              <p className="mt-2 text-xs text-alert font-mono">{errors.password.message}</p>
+            )}
           </div>
 
           {error && (
@@ -64,8 +77,8 @@ export default function LoginPage() {
             </div>
           )}
 
-          <Button type="submit" variant="primary" className="w-full h-12" disabled={loading}>
-            {loading ? 'Authenticating...' : 'Login'}
+          <Button type="submit" variant="primary" className="w-full h-12" disabled={isSubmitting}>
+            {isSubmitting ? 'Authenticating...' : 'Login'}
           </Button>
         </form>
       </div>

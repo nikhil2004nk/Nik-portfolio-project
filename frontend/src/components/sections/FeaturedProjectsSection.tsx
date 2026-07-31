@@ -8,7 +8,13 @@ import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { FolderGit2, ArrowRight } from 'lucide-react';
 
-export function FeaturedProjects({ projects = [] }: { projects: any[] }) {
+import { Project } from '../../types/project';
+
+interface FeaturedProjectsSectionProps {
+  projects: Project[];
+}
+
+export function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionProps) {
   const [showAll, setShowAll] = React.useState(false);
   const initialCount = 4;
   const displayedProjects = showAll ? projects : projects.slice(0, initialCount);

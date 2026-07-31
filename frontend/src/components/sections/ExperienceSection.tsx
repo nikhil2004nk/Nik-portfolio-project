@@ -4,7 +4,13 @@ import * as React from 'react';
 import { ScrollReveal } from '../ui/ScrollReveal';
 import { Button } from '../ui/Button';
 
-export function Experience({ experience = [] }: { experience: any[] }) {
+import { Experience } from '../../types/experience';
+
+interface ExperienceSectionProps {
+  experience: Experience[];
+}
+
+export function ExperienceSection({ experience = [] }: ExperienceSectionProps) {
   const [showAll, setShowAll] = React.useState(false);
   const initialCount = 3;
   const displayedExperience = showAll ? experience : experience.slice(0, initialCount);
@@ -64,3 +70,4 @@ export function Experience({ experience = [] }: { experience: any[] }) {
     </section>
   );
 }
+

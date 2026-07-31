@@ -6,7 +6,7 @@ import { Button } from '../ui/Button';
 import { ScrollReveal } from '../ui/ScrollReveal';
 import { Mail, Send } from 'lucide-react';
 
-export function Contact() {
+export function ContactSection() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
@@ -17,7 +17,7 @@ export function Contact() {
     setErrorMsg('');
 
     try {
-      await api.submitContact(formData);
+      await api.post('/contact-message', formData);
       setStatus('success');
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error: any) {

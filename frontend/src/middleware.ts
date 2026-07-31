@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const token = request.cookies.get('access_token')?.value || '';
+  const token = request.cookies.get('jwt')?.value || '';
 
   if (isAdminPath && !isPublicPath && !token) {
     return NextResponse.redirect(new URL('/admin/login', request.url));

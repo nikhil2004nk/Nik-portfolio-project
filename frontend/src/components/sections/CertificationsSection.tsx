@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export function Certifications() {
+export function CertificationsSection() {
   return (
     <section id="certifications" className="py-20">
       <div className="container mx-auto px-4">
@@ -10,3 +10,4 @@ export function Certifications() {
     </section>
   );
 }
+

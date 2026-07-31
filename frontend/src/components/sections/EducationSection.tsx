@@ -1,6 +1,13 @@
 import * as React from 'react';
 
-export function Education({ education = [], certs = [] }: { education: any[], certs: any[] }) {
+import { Education, Certification } from '../../types/experience';
+
+interface EducationSectionProps {
+  education: Education[];
+  certs: Certification[];
+}
+
+export function EducationSection({ education = [], certs = [] }: EducationSectionProps) {
   return (
     <section id="education" className="py-20">
       <div className="container mx-auto px-4 max-w-4xl">
@@ -37,3 +44,4 @@ export function Education({ education = [], certs = [] }: { education: any[], ce
     </section>
   );
 }
+

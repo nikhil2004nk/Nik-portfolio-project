@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { ScrollReveal } from '../ui/ScrollReveal';
 
-export function FAQ() {
+export function FAQSection() {
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
 
   const faqs = [
@@ -69,3 +69,4 @@ export function FAQ() {
     </section>
   );
 }
+
