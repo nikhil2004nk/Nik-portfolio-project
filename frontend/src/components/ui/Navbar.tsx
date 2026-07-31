@@ -15,7 +15,10 @@ const navLinks = [
   { name: 'FAQ', href: '#faq' }
 ];
 
+import { usePathname } from 'next/navigation';
+
 export function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState('');
@@ -28,7 +31,6 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
       
-      // Simple scroll spy
       const sections = navLinks.map(link => link.href.replace('#', ''));
       for (const section of sections.reverse()) {
         const el = document.getElementById(section);
@@ -41,6 +43,10 @@ export function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (pathname.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <>

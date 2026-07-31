@@ -6,8 +6,23 @@ export class SkillsService {
   constructor(private prisma: PrismaService) {}
 
   findAll() {
-    return this.prisma.skill.findMany({
-      orderBy: { createdAt: "desc" }
+    return this.prisma.skill.findMany();
+  }
+
+  create(data: any) {
+    return this.prisma.skill.create({ data });
+  }
+
+  update(id: string, data: any) {
+    return this.prisma.skill.update({
+      where: { id },
+      data
+    });
+  }
+
+  remove(id: string) {
+    return this.prisma.skill.delete({
+      where: { id }
     });
   }
 }

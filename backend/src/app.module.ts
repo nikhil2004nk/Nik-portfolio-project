@@ -12,6 +12,7 @@ import { EducationModule } from './modules/education/education.module';
 import { CertificationsModule } from './modules/certifications/certifications.module';
 import { ContactModule } from './modules/contact/contact.module';
 import { HealthModule } from './modules/health/health.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { HealthModule } from './modules/health/health.module';
     CertificationsModule,
     ContactModule,
     HealthModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

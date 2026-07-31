@@ -24,4 +24,16 @@ export class ContactService {
 
     return { statusCode: 201, message: 'Message sent successfully' };
   }
+
+  findAll() {
+    return this.prisma.contactMessage.findMany({
+      orderBy: { createdAt: 'desc' }
+    });
+  }
+
+  remove(id: string) {
+    return this.prisma.contactMessage.delete({
+      where: { id }
+    });
+  }
 }

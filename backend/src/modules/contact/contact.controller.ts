@@ -1,5 +1,6 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Delete, Param } from '@nestjs/common';
 import { ContactService } from './contact.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { ThrottlerGuard } from '@nestjs/throttler';
 
@@ -11,5 +12,17 @@ export class ContactController {
   @Post()
   create(@Body() createContactDto: CreateContactDto) {
     return this.contactService.create(createContactDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  findAll() {
+    return this.contactService.findAll();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.contactService.remove(id);
   }
 }
