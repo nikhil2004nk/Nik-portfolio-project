@@ -31,6 +31,7 @@ export function FAQ() {
           {faqs.map((faq, index) => (
             <div key={index} className="border-b border-hairline pb-4 last:border-0 last:pb-0">
               <button
+                suppressHydrationWarning
                 className="w-full text-left flex items-center justify-between py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal rounded-md"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >

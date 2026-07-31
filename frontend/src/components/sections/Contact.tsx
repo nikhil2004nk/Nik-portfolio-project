@@ -53,6 +53,7 @@ export function Contact() {
                   <div>
                     <label htmlFor="name" className="block text-xs font-mono text-muted mb-2 uppercase">Name</label>
                     <input
+                      suppressHydrationWarning
                       type="text"
                       id="name"
                       name="name"
@@ -65,6 +66,7 @@ export function Contact() {
                   <div>
                     <label htmlFor="email" className="block text-xs font-mono text-muted mb-2 uppercase">Email</label>
                     <input
+                      suppressHydrationWarning
                       type="email"
                       id="email"
                       name="email"
@@ -77,6 +79,7 @@ export function Contact() {
                   <div>
                     <label htmlFor="message" className="block text-xs font-mono text-muted mb-2 uppercase">Message</label>
                     <textarea
+                      suppressHydrationWarning
                       id="message"
                       name="message"
                       required
