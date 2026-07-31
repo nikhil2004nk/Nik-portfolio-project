@@ -4,9 +4,11 @@ import { ProjectController } from './project.controller';
 import { AdminProjectController } from './admin-project.controller';
 import { ProjectRepository } from './repository/project.repository';
 
+import { ProjectMapper } from './mapper/project.mapper';
+
 @Module({
   controllers: [ProjectController, AdminProjectController],
-  providers: [ProjectService, ProjectRepository],
+  providers: [ProjectService, ProjectRepository, ProjectMapper],
   exports: [ProjectService],
 })
 export class ProjectModule {}

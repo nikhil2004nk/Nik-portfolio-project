@@ -33,6 +33,12 @@ export class PortfolioService {
       profile,
       featuredProjects,
       skills,
+      socials: [],
+      services: [],
+      experience: [],
+      education: [],
+      certifications: [],
+      testimonials: [],
     };
 
     // Cache for 60 seconds
