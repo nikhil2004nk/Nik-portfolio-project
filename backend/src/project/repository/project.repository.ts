@@ -39,4 +39,16 @@ export class ProjectRepository {
       },
     });
   }
+
+  async create(data: Prisma.ProjectCreateInput) {
+    return this.prisma.project.create({ data });
+  }
+
+  async update(where: Prisma.ProjectWhereUniqueInput, data: Prisma.ProjectUpdateInput) {
+    return this.prisma.project.update({ where, data });
+  }
+
+  async delete(where: Prisma.ProjectWhereUniqueInput) {
+    return this.prisma.project.delete({ where });
+  }
 }

@@ -12,9 +12,10 @@ import { RichTextField } from '../../../../components/forms/RichTextField';
 import { ImageUploader } from '../../../../components/upload/ImageUploader';
 import { Button } from '../../../../components/ui/Button';
 
-export default function ProjectEditorPage({ params }: { params: { id: string } }) {
+export default function ProjectEditorPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = React.use(params);
   const router = useRouter();
-  const isNew = params.id === 'new';
+  const isNew = resolvedParams.id === 'new';
   const [activeTab, setActiveTab] = useState('basic');
   const [loading, setLoading] = useState(!isNew);
   const [saveSuccess, setSaveSuccess] = useState(false);
@@ -28,7 +29,7 @@ export default function ProjectEditorPage({ params }: { params: { id: string } }
     if (!isNew) {
       const loadProject = async () => {
         try {
-          const data = await projectService.getById(params.id);
+          const data = await projectService.getById(resolvedParams.id);
           reset(data);
         } catch (e) {
           console.error(e);
@@ -38,7 +39,7 @@ export default function ProjectEditorPage({ params }: { params: { id: string } }
       };
       loadProject();
     }
-  }, [params.id, isNew, reset]);
+  }, [resolvedParams.id, isNew, reset]);
 
   const onSubmit = async (data: Partial<Project>) => {
     try {
@@ -47,7 +48,7 @@ export default function ProjectEditorPage({ params }: { params: { id: string } }
         await projectService.create(data);
         router.push('/admin/projects');
       } else {
-        await projectService.update(params.id, data);
+        await projectService.update(resolvedParams.id, data);
         setSaveSuccess(true);
         setTimeout(() => setSaveSuccess(false), 3000);
       }
@@ -104,7 +105,7 @@ export default function ProjectEditorPage({ params }: { params: { id: string } }
           <form className="space-y-6">
             <div className={activeTab === 'basic' ? 'block' : 'hidden'}>
               <div className="space-y-6">
-                <TextField label="Title" registration={register('title')} required />
+                <TextField label="Name" registration={register('name')} required />
                 <TextField label="Slug" registration={register('slug')} required />
                 <TextAreaField label="Description" registration={register('description')} />
               </div>

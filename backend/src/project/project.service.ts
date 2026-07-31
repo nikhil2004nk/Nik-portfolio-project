@@ -11,8 +11,7 @@ export class ProjectService {
   ) {}
 
   async create(data: Prisma.ProjectCreateInput) {
-    // In real implementation, this would go through repository
-    return data;
+    return this.projectRepository.create(data);
   }
 
   async findAllAdmin() {
@@ -55,13 +54,52 @@ export class ProjectService {
   }
 
   async update(id: string, data: Prisma.ProjectUpdateInput) {
-    // Logic to update
-    return { id, ...data };
+    // Strip read-only and relational fields that cause Prisma validation errors
+    const { 
+      id: _, 
+      createdAt, 
+      updatedAt, 
+      technologies,
+      features,
+      screenshots,
+      metrics,
+      tags,
+      categories,
+      
+      // Extract frontend-specific fields
+      name,
+      title,
+      content,
+      thumbnailUrl,
+      coverImageUrl,
+      githubUrl,
+      demoUrl,
+      
+      ...updateData 
+    } = data as any;
+    
+    // Map to Prisma fields
+    const finalName = name || title;
+    if (finalName !== undefined) updateData.name = finalName;
+    if (thumbnailUrl !== undefined) updateData.thumbnail = thumbnailUrl;
+    if (coverImageUrl !== undefined) updateData.coverImage = coverImageUrl;
+    
+    if (content !== undefined) {
+      updateData.caseStudy = { content };
+    }
+    
+    if (githubUrl !== undefined || demoUrl !== undefined) {
+      updateData.links = {
+        github: githubUrl || '',
+        demo: demoUrl || ''
+      };
+    }
+    
+    return this.projectRepository.update({ id }, updateData);
   }
 
   async remove(id: string) {
-    // Logic to remove
-    return { id };
+    return this.projectRepository.delete({ id });
   }
 
   async addFeature(projectId: string, data: any) {

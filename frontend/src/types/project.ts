@@ -1,7 +1,7 @@
 import { BaseEntity } from './common';
 
 export interface Project extends BaseEntity {
-  title: string;
+  name: string;
   slug: string;
   description: string;
   content: string | null;
