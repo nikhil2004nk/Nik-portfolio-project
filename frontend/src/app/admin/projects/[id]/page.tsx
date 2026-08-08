@@ -21,65 +21,23 @@ import { RichTextField } from "../../../../components/forms/RichTextField";
 import { ImageUploader } from "../../../../components/upload/ImageUploader";
 import { GalleryUploader } from "../../../../components/upload/GalleryUploader";
 
-const DEFAULT_CASE_STUDY_TEMPLATE = `## Overview\n\n\n## Problem\n\n\n## Target Audience\n\n\n## Solution\n\n\n## Pipeline & Workflow\n\n\n## Key Features\n\n\n## Technology Stack\n\n\n## Architecture\n\n\n## Challenges & Learnings\n\n\n## Outcome\n\n\n## Future Roadmap\n\n`;
-
-const DEFAULT_STRUCTURED_SECTIONS = [
-  { heading: 'Overview', content: '' },
-  { heading: 'Problem', content: '' },
-  { heading: 'Target Audience', content: '' },
-  { heading: 'Solution', content: '' },
-  { heading: 'Pipeline & Workflow', content: '' },
-  { heading: 'Key Features', content: '' },
-  { heading: 'Technology Stack', content: '' },
-  { heading: 'Architecture', content: '' },
-  { heading: 'Challenges & Learnings', content: '' },
-  { heading: 'Future Roadmap', content: '' },
-];
-
-const DEFAULT_HIGHLIGHTS_ARR = [
-  { title: "Key Achievement 1", description: "" },
-  { title: "Key Achievement 2", description: "" },
-  { title: "Key Achievement 3", description: "" }
-];
-
-const DEFAULT_HIGHLIGHTS_RAW = "- **Key Achievement 1**: \n- **Key Achievement 2**: \n- **Key Achievement 3**: ";
-
-const DEFAULT_ARCHITECTURE_OVERVIEW = "Modular full-stack architecture designed for scalability and performance.";
-
-const DEFAULT_ARCHITECTURE_COMPONENTS = [
-  { name: "Frontend", technology: "Next.js / React", responsibility: "User interface and client-side logic." },
-  { name: "Backend API", technology: "Node.js / Express or NestJS", responsibility: "Core business logic, authentication, and API endpoints." },
-  { name: "Database", technology: "PostgreSQL / MongoDB", responsibility: "Data persistence and querying." }
-];
-
-const DEFAULT_ARCHITECTURE_FLOW = [
-  { step: "User Interaction" },
-  { step: "Frontend App" },
-  { step: "Backend API" },
-  { step: "Database" }
-];
-
-const DEFAULT_ARCHITECTURE_RAW = `### Overview\n${DEFAULT_ARCHITECTURE_OVERVIEW}\n\n### Components\n- **Frontend (Next.js / React)**: User interface and client-side logic.\n- **Backend API (Node.js)**: Core business logic, authentication, and API endpoints.\n- **Database (PostgreSQL / MongoDB)**: Data persistence and querying.\n\n### Pipeline / Flow\nUser Interaction ➔ Frontend App ➔ Backend API ➔ Database`;
-
-const DEFAULT_DEPLOYMENT_ARR = [
-  { environment: "Frontend", technology: "Vercel / Netlify", description: "Production-ready web deployment." },
-  { environment: "Backend API", technology: "Render / AWS", description: "Containerized API service." },
-  { environment: "Database", technology: "Supabase / RDS", description: "Managed or production PostgreSQL environment." }
-];
-
-const DEFAULT_DEPLOYMENT_RAW = `### Frontend\n- **Technology**: Vercel / Netlify\n- **Deployment**: Production-ready web deployment.\n\n### Backend API\n- **Technology**: Render / AWS\n- **Deployment**: Containerized API service.\n\n### Database\n- **Technology**: Supabase / RDS\n- **Deployment**: Managed or production PostgreSQL environment.`;
-
-const DEFAULT_TIMELINE_ARR = [
-  { phase: "Planning & Architecture", description: "Defined the system architecture, technology stack, and core application modules." },
-  { phase: "Core Platform Development", description: "Implemented authentication, database schemas, and core backend APIs." },
-  { phase: "Feature Implementation", description: "Built the primary features, user interfaces, and business logic." },
-  { phase: "Testing & Refinement", description: "Validated the complete workflow, fixed bugs, and improved UX." },
-  { phase: "Deployment & Launch", description: "Prepared the application for production deployment and launched." }
-];
-
-const DEFAULT_TIMELINE_RAW = DEFAULT_TIMELINE_ARR.map(t => `### ${t.phase}\n${t.description}`).join('\n\n');
-
 import { Button } from "../../../../components/ui/Button";
+import {
+  DEFAULT_CASE_STUDY_TEMPLATE,
+  DEFAULT_STRUCTURED_SECTIONS,
+  DEFAULT_HIGHLIGHTS_ARR,
+  DEFAULT_HIGHLIGHTS_RAW,
+  DEFAULT_ARCHITECTURE_OVERVIEW,
+  DEFAULT_ARCHITECTURE_COMPONENTS,
+  DEFAULT_ARCHITECTURE_FLOW,
+  DEFAULT_ARCHITECTURE_RAW,
+  DEFAULT_DEPLOYMENT_ARR,
+  DEFAULT_DEPLOYMENT_RAW,
+  DEFAULT_TIMELINE_ARR,
+  DEFAULT_TIMELINE_RAW,
+  DEFAULT_FEATURES_ARR,
+  DEFAULT_METRICS_ARR
+} from "./constants";
 
 export default function ProjectEditorPage({
   params,
@@ -120,6 +78,8 @@ export default function ProjectEditorPage({
       categoryIds: [],
       technologyIds: [],
       tagIds: [],
+      features: DEFAULT_FEATURES_ARR,
+      metrics: DEFAULT_METRICS_ARR,
       caseStudyArr: DEFAULT_STRUCTURED_SECTIONS,
       highlightsArr: DEFAULT_HIGHLIGHTS_ARR,
       timelineArr: DEFAULT_TIMELINE_ARR,
@@ -200,20 +160,31 @@ export default function ProjectEditorPage({
           );
 
           // Hydrate the form with the API data mapped to our UI fields
+          const isCaseStudyEmpty = !csData.raw && (!csData.parsed || csData.parsed.length === 0);
+          const isHighlightsEmpty = !hlData.raw && (!hlData.parsed || hlData.parsed.length === 0);
+          const isTimelineEmpty = !tlData.raw && (!tlData.parsed || tlData.parsed.length === 0);
+          const isArchEmpty = !archData.raw && (!archFlow || archFlow.length === 0) && (!archComps || archComps.length === 0);
+          const isDepEmpty = !depData.raw && (!depArr || depArr.length === 0);
+
           reset({
             ...data,
-            content: csData.raw || DEFAULT_CASE_STUDY_TEMPLATE,
-            caseStudyArr: (csData.parsed && csData.parsed.length > 0) ? csData.parsed : DEFAULT_STRUCTURED_SECTIONS,
-            highlightsRaw: hlData.raw || DEFAULT_HIGHLIGHTS_RAW,
-            highlightsArr: (hlData.parsed && hlData.parsed.length > 0) ? hlData.parsed : DEFAULT_HIGHLIGHTS_ARR,
-            timelineRaw: tlData.raw || DEFAULT_TIMELINE_RAW,
-            timelineArr: (tlData.parsed && tlData.parsed.length > 0) ? tlData.parsed : DEFAULT_TIMELINE_ARR,
-            architectureRaw: archData.raw || DEFAULT_ARCHITECTURE_RAW,
-            architectureOverview: archOverview || DEFAULT_ARCHITECTURE_OVERVIEW,
-            architectureFlowArr: (archFlow && archFlow.length > 0) ? archFlow : DEFAULT_ARCHITECTURE_FLOW,
-            architectureCompArr: (archComps && archComps.length > 0) ? archComps : DEFAULT_ARCHITECTURE_COMPONENTS,
-            deploymentRaw: depData.raw || DEFAULT_DEPLOYMENT_RAW,
-            deploymentArr: (depArr && depArr.length > 0) ? depArr : DEFAULT_DEPLOYMENT_ARR,
+            content: isCaseStudyEmpty ? DEFAULT_CASE_STUDY_TEMPLATE : csData.raw,
+            caseStudyArr: isCaseStudyEmpty ? DEFAULT_STRUCTURED_SECTIONS : (csData.parsed || []),
+            
+            highlightsRaw: isHighlightsEmpty ? DEFAULT_HIGHLIGHTS_RAW : hlData.raw,
+            highlightsArr: isHighlightsEmpty ? DEFAULT_HIGHLIGHTS_ARR : (hlData.parsed || []),
+            
+            timelineRaw: isTimelineEmpty ? DEFAULT_TIMELINE_RAW : tlData.raw,
+            timelineArr: isTimelineEmpty ? DEFAULT_TIMELINE_ARR : (tlData.parsed || []),
+            
+            architectureRaw: isArchEmpty ? DEFAULT_ARCHITECTURE_RAW : archData.raw,
+            architectureOverview: isArchEmpty ? DEFAULT_ARCHITECTURE_OVERVIEW : archOverview,
+            architectureFlowArr: isArchEmpty ? DEFAULT_ARCHITECTURE_FLOW : (archFlow || []),
+            architectureCompArr: isArchEmpty ? DEFAULT_ARCHITECTURE_COMPONENTS : (archComps || []),
+            
+            deploymentRaw: isDepEmpty ? DEFAULT_DEPLOYMENT_RAW : depData.raw,
+            deploymentArr: isDepEmpty ? DEFAULT_DEPLOYMENT_ARR : (depArr || []),
+            
             githubUrl: data.links?.github || "",
             demoUrl: data.links?.demo || "",
             thumbnailUrl: data.thumbnail || "",
@@ -222,9 +193,11 @@ export default function ProjectEditorPage({
             seoDescription: data.seo?.description || "",
             seoKeywords: data.seo?.keywords || "",
             categoryIds: data.categories?.map((c: any) => c.categoryId) || [],
-            technologyIds:
-              data.technologies?.map((t: any) => t.technologyId) || [],
+            technologyIds: data.technologies?.map((t: any) => t.technologyId) || [],
             tagIds: data.tags?.map((t: any) => t.tagId) || [],
+            
+            features: (data.features && data.features.length > 0) ? data.features : [],
+            metrics: (data.metrics && data.metrics.length > 0) ? data.metrics : [],
           });
         } catch (e) {
           console.error(e);

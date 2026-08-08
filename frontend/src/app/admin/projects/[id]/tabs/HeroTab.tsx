@@ -30,6 +30,7 @@ export function HeroTab({ categories, technologies, tags }: HeroTabProps) {
                   {c.name}
                 </label>
               ))}
+              {categories.length === 0 && <p className="text-xs text-muted italic">No categories available.</p>}
             </div>
           </div>
           <div>
@@ -41,6 +42,7 @@ export function HeroTab({ categories, technologies, tags }: HeroTabProps) {
                   {t.name}
                 </label>
               ))}
+              {technologies.length === 0 && <p className="text-xs text-muted italic">No technologies available.</p>}
             </div>
           </div>
           <div>
@@ -52,6 +54,7 @@ export function HeroTab({ categories, technologies, tags }: HeroTabProps) {
                   {t.name}
                 </label>
               ))}
+              {tags.length === 0 && <p className="text-xs text-muted italic">No tags available.</p>}
             </div>
           </div>
         </div>
