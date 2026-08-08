@@ -7,7 +7,7 @@ import { Mail } from 'lucide-react';
 
 const renderHighlightedText = (text: string) => {
   let highlighted = text;
-  
+
   highlighted = highlighted.replace(/"([^"]+)":/g, '<span class="text-muted">"$1":</span>');
   highlighted = highlighted.replace(/: "([^"]+)"/g, ': <span class="text-signal">"$1"</span>');
   highlighted = highlighted.replace(/"available"/g, '<span class="text-ledger">"available"</span>');
@@ -15,10 +15,10 @@ const renderHighlightedText = (text: string) => {
   highlighted = highlighted.replace(/"Next\.js"/g, '<span class="text-signal">"Next.js"</span>');
   highlighted = highlighted.replace(/"NestJS"/g, '<span class="text-signal">"NestJS"</span>');
   highlighted = highlighted.replace(/"MySQL"/g, '<span class="text-signal">"MySQL"</span>');
-  
+
   highlighted = highlighted.replace(/GET \/nikhil/g, '<span class="text-signal">GET</span> <span class="text-primary">/nikhil</span>');
   highlighted = highlighted.replace(/200 OK/g, '<span class="text-ledger">200 OK</span>');
-  
+
   return <span dangerouslySetInnerHTML={{ __html: highlighted }} />;
 };
 
@@ -36,12 +36,21 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
 
   React.useEffect(() => {
     let i = 0;
-    const interval = setInterval(() => {
-      setTypedText(terminalText.substring(0, i));
-      i++;
-      if (i > terminalText.length) clearInterval(interval);
-    }, 15);
-    return () => clearInterval(interval);
+    let interval: NodeJS.Timeout;
+
+    // Wait for the splash screen to fully fade out (2500ms + 1800ms exit transition)
+    const timeout = setTimeout(() => {
+      interval = setInterval(() => {
+        setTypedText(terminalText.substring(0, i));
+        i++;
+        if (i > terminalText.length) clearInterval(interval);
+      }, 15);
+    }, 3300);
+
+    return () => {
+      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -50,10 +59,10 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-signal/20 rounded-full blur-[120px] pointer-events-none animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 translate-x-1/4 translate-y-1/4 w-[400px] h-[400px] bg-ledger/20 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDelay: '2s' }} />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,var(--grid-color)_1px,transparent_1px)] bg-[length:24px_24px] pointer-events-none" />
-      
+
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-          
+
           {/* Left Column - Headline */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -72,7 +81,7 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
                 </span>
               </div>
             )}
-            
+
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-display font-bold text-primary mb-4 tracking-tighter">
               <span className="text-gradient">{profile?.name || 'Nikhil Kushwaha'}</span>
             </h1>
@@ -80,7 +89,7 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
             <p className="text-base md:text-lg text-muted max-w-lg mb-10 leading-relaxed font-light">
               {profile?.bio || 'Crafting premium, highly-performant web applications using modern architectures.'}
             </p>
-            
+
             <div className="flex flex-wrap gap-4">
               <Link href="#contact">
                 <Button size="lg" variant="primary" className="gap-2">
@@ -94,9 +103,9 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
           </motion.div>
 
           {/* Right Column - Glass Terminal */}
-          <div className="order-1 md:order-2 animate-float">
+          <div className="order-1 md:order-2 animate-float dark">
             <div className="glass-card p-1">
-              <div className="bg-ink/80 rounded-[0.9rem] p-6 h-full relative overflow-hidden backdrop-blur-xl">
+              <div className="bg-ink/90 rounded-[0.9rem] p-6 h-full relative overflow-hidden backdrop-blur-xl">
                 {/* Terminal Header */}
                 <div className="flex items-center justify-between mb-6 border-b border-hairline pb-4">
                   <div className="flex items-center gap-2">
@@ -106,7 +115,7 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
                   </div>
                   <div className="font-mono text-xs text-muted">terminal ~ zsh</div>
                 </div>
-                
+
                 {/* Terminal Content */}
                 <pre className="font-mono text-sm text-primary whitespace-pre-wrap leading-loose">
                   {renderHighlightedText(typedText)}
@@ -115,7 +124,7 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </section>

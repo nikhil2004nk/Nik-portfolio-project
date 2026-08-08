@@ -5,6 +5,7 @@ import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { ScrollToTop } from "../components/layout/ScrollToTop";
 import { AnimatedBackground } from "../components/ui/AnimatedBackground";
+import { SplashScreen } from "../components/ui/SplashScreen";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -47,6 +48,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <SplashScreen />
           <AnimatedBackground />
           <Navbar />
           <main className="flex-1">
