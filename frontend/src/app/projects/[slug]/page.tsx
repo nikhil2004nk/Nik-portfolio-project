@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/Badge';
 import { ArrowLeft, Code, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
+import { ImageCarousel } from '@/components/ui/ImageCarousel';
 
 async function getProject(slug: string) {
   try {
@@ -30,6 +31,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <ArrowLeft className="w-4 h-4" />
           Back to all systems
         </Link>
+
+        {(project.coverImage || project.thumbnail) && (
+          <div className="w-full h-64 md:h-96 mb-12 rounded-2xl overflow-hidden border border-hairline relative">
+            <ImageCarousel 
+              images={[project.coverImage, project.thumbnail].filter(Boolean)} 
+              alt={project.name} 
+            />
+          </div>
+        )}
 
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary mb-6">{project.name}</h1>
         <p className="text-lg md:text-xl text-muted mb-8 leading-relaxed">{project.description}</p>

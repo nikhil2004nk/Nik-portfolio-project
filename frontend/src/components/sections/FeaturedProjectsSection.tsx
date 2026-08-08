@@ -67,18 +67,35 @@ export function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionPro
                     </div>
                   </div>
 
-                  {isHeroProject && (
+                  {/* Image Section */}
+                  {isHeroProject ? (
                     <div className="hidden lg:block flex-1 h-full min-h-[350px] bg-ink/50 backdrop-blur-sm rounded-xl border border-hairline relative overflow-hidden group-hover:border-signal/40 transition-colors shadow-inner">
-                      {/* Placeholder for project screenshot */}
-                      <div className="absolute inset-0 flex items-center justify-center text-muted font-mono text-sm opacity-50">// system_screenshot.jpg</div>
-
+                      {project.coverImage || project.thumbnail ? (
+                        <img 
+                          src={(project.coverImage || project.thumbnail).startsWith('/') ? `http://localhost:4000${project.coverImage || project.thumbnail}` : (project.coverImage || project.thumbnail)} 
+                          alt={project.name}
+                          className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-muted font-mono text-sm opacity-50">// system_screenshot.jpg</div>
+                      )}
                       {/* Decorative accents */}
-                      <div className="absolute top-4 left-4 flex gap-1.5">
-                        <div className="w-2.5 h-2.5 rounded-full bg-hairline"></div>
-                        <div className="w-2.5 h-2.5 rounded-full bg-hairline"></div>
-                        <div className="w-2.5 h-2.5 rounded-full bg-hairline"></div>
+                      <div className="absolute top-4 left-4 flex gap-1.5 z-10">
+                        <div className="w-2.5 h-2.5 rounded-full bg-hairline shadow-sm backdrop-blur-md"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-hairline shadow-sm backdrop-blur-md"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-hairline shadow-sm backdrop-blur-md"></div>
                       </div>
                     </div>
+                  ) : (
+                    (project.thumbnail || project.coverImage) && (
+                      <div className="w-full h-48 mb-6 bg-ink/50 backdrop-blur-sm rounded-xl border border-hairline relative overflow-hidden group-hover:border-signal/40 transition-colors shadow-inner">
+                        <img 
+                          src={(project.thumbnail || project.coverImage).startsWith('/') ? `http://localhost:4000${project.thumbnail || project.coverImage}` : (project.thumbnail || project.coverImage)} 
+                          alt={project.name}
+                          className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                        />
+                      </div>
+                    )
                   )}
                 </Card>
               </ScrollReveal>

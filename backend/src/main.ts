@@ -16,7 +16,9 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
 
   // Security & Optimization
-  app.use(helmet());
+  app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" }
+  }));
   app.use(compression());
   app.use(cookieParser());
   app.enableCors({

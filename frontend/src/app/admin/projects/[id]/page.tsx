@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { projectService } from '../../../../features/project-builder/services/project.service';
+import { uploadService } from '../../../../features/project-builder/services/upload.service';
 import { Project } from '../../../../types/project';
 import { TextField } from '../../../../components/forms/TextField';
 import { TextAreaField } from '../../../../components/forms/TextAreaField';
@@ -20,6 +21,7 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
   const [loading, setLoading] = useState(!isNew);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [uploadingImage, setUploadingImage] = useState<'thumbnail' | 'cover' | null>(null);
   
   const { register, handleSubmit, reset, setValue, watch, formState: { isSubmitting, isDirty } } = useForm<any>();
 
@@ -82,11 +84,27 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
     }
   };
 
-  const handleImageUpload = (field: 'thumbnailUrl' | 'coverImageUrl') => (file: File) => {
-    // Mock upload: in real life, call uploadService and set URL
-    console.log('Uploading', file.name);
-    const mockUrl = URL.createObjectURL(file);
-    setValue(field, mockUrl, { shouldDirty: true });
+  const handleImageUpload = (field: 'thumbnailUrl' | 'coverImageUrl') => async (file: File) => {
+    // We require the project slug to be set before uploading an image so we know where to save it
+    const currentSlug = watch('slug');
+    if (!currentSlug) {
+      setSaveError('Please enter a "Slug" in the Basic tab before uploading images so we can create a dedicated folder for this project.');
+      setActiveTab('basic');
+      return;
+    }
+
+    try {
+      setSaveError(null);
+      setUploadingImage(field === 'thumbnailUrl' ? 'thumbnail' : 'cover');
+      
+      const uploadedUrl = await uploadService.uploadProjectImage(currentSlug, file);
+      setValue(field, uploadedUrl, { shouldDirty: true });
+    } catch (e: any) {
+      console.error(e);
+      setSaveError(e.message || 'Failed to upload image.');
+    } finally {
+      setUploadingImage(null);
+    }
   };
 
   if (loading) return <div className="animate-pulse">Loading project...</div>;
@@ -158,11 +176,13 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
                   label="Thumbnail Image" 
                   onUpload={handleImageUpload('thumbnailUrl')}
                   currentImage={thumbnail}
+                  isUploading={uploadingImage === 'thumbnail'}
                 />
                 <ImageUploader 
                   label="Cover Image" 
                   onUpload={handleImageUpload('coverImageUrl')}
                   currentImage={cover}
+                  isUploading={uploadingImage === 'cover'}
                 />
               </div>
             </div>
