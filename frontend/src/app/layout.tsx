@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, IBM_Plex_Mono, Inter } from "next/font/google";
+<<<<<<< HEAD
 import { ThemeProvider } from "../components/layout/ThemeProvider";
 import { Navbar } from "../components/ui/Navbar";
 import { Footer } from "../components/ui/Footer";
 import { ScrollToTop } from "../components/ui/ScrollToTop";
 import { AnimatedBackground } from "../components/ui/AnimatedBackground";
+=======
+import { ThemeProvider } from "../providers/ThemeProvider";
+
+>>>>>>> c633f2b51fc20eb0d5e92538d8d1f06b9093156f
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -24,8 +29,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Nikhil Kushwaha | Full Stack Developer",
-  description: "Portfolio of Nikhil Kushwaha, a full-stack developer specializing in NestJS, React.js, Next.js, and fintech.",
+  title: 'Portfolio | Full Stack Developer',
+  description: 'Personal portfolio and blog showcasing my projects, skills, and experience.',
+  keywords: ['developer', 'portfolio', 'full stack', 'react', 'nextjs', 'typescript'],
+  authors: [{ name: 'Nikhil' }],
+  openGraph: {
+    title: 'Portfolio | Full Stack Developer',
+    description: 'Personal portfolio and blog showcasing my projects, skills, and experience.',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
@@ -40,6 +52,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+<<<<<<< HEAD
           <AnimatedBackground />
           <Navbar />
           <main className="flex-1">
@@ -47,6 +60,9 @@ export default function RootLayout({
           </main>
           <Footer />
           <ScrollToTop />
+=======
+          {children}
+>>>>>>> c633f2b51fc20eb0d5e92538d8d1f06b9093156f
         </ThemeProvider>
       </body>
     </html>
