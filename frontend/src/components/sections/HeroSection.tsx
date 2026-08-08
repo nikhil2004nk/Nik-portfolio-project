@@ -31,6 +31,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ profile, socials }: HeroSectionProps) {
   const [typedText, setTypedText] = React.useState('');
+  const [isBioExpanded, setIsBioExpanded] = React.useState(false);
   const terminalText = `GET /nikhil\n200 OK\n{\n  "role": "Full Stack Developer",\n  "stack": ["React.js", "Next.js", "NestJS", "MySQL"],\n  "status": "available"\n}`;
   const isTypingComplete = typedText.length >= terminalText.length;
 
@@ -71,7 +72,7 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
             className="order-2 md:order-1"
           >
             {(profile?.freelanceAvailable || profile?.remoteAvailable) && (
-              <div className="inline-flex items-center gap-3 mb-8 px-4 py-2 glass-panel rounded-full border border-hairline">
+              <div className="inline-flex items-center gap-3 mb-6 px-3 py-1.5 md:px-4 md:py-2 glass-panel rounded-full border border-hairline">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-signal opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-signal"></span>
@@ -82,13 +83,23 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
               </div>
             )}
 
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-display font-bold text-primary mb-4 tracking-tighter">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-primary mb-3 tracking-tighter">
               <span className="text-gradient">{profile?.name || 'Nikhil Kushwaha'}</span>
             </h1>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-mono text-muted mb-8 font-light">{profile?.headline || 'Full Stack Developer'}</h2>
-            <p className="text-base md:text-lg text-muted max-w-lg mb-10 leading-relaxed font-light">
-              {profile?.bio || 'Crafting premium, highly-performant web applications using modern architectures.'}
-            </p>
+            <h2 className="text-lg sm:text-xl md:text-2xl font-mono text-muted mb-6 font-light">{profile?.headline || 'Full Stack Developer'}</h2>
+            <div className="max-w-lg mb-8">
+              <p className={`text-sm md:text-base text-muted leading-relaxed font-light ${isBioExpanded ? '' : 'line-clamp-3'}`}>
+                {profile?.bio || 'Crafting premium, highly-performant web applications using modern architectures.'}
+              </p>
+              {((profile?.bio?.length || 0) > 120) && (
+                <button 
+                  onClick={() => setIsBioExpanded(!isBioExpanded)}
+                  className="text-signal text-xs md:text-sm font-mono mt-2 hover:text-primary transition-colors focus:outline-none flex items-center gap-1"
+                >
+                  {isBioExpanded ? 'Show less' : 'Read more'}
+                </button>
+              )}
+            </div>
 
             <div className="flex flex-wrap gap-4">
               <Link href="#contact">

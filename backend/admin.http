@@ -1,0 +1,19 @@
+### Create an Admin User
+POST http://localhost:4000/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "email": "nik@gmail.com",
+  "password": "nikhil"
+}
+
+###
+
+### Login with Admin User
+POST http://localhost:4000/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "nik@gmail.com",
+  "password": "nikhil"
+}

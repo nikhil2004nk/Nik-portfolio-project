@@ -10,18 +10,17 @@ import { TextAreaField } from '../../../components/forms/TextAreaField';
 import { Button } from '../../../components/ui/Button';
 
 export default function ProfileAdminPage() {
-  const [profileId, setProfileId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
-  const { register, handleSubmit, reset, formState: { isSubmitting } } = useForm<Partial<Profile>>();
+  const { register, handleSubmit, reset, formState: { isSubmitting, isDirty } } = useForm<Partial<Profile>>();
 
   useEffect(() => {
     const loadProfile = async () => {
       try {
         const data = await profileService.getProfile();
         if (data) {
-          setProfileId(data.id);
           reset(data);
         }
       } catch (error) {
@@ -34,14 +33,32 @@ export default function ProfileAdminPage() {
   }, [reset]);
 
   const onSubmit = async (data: Partial<Profile>) => {
-    if (!profileId) return;
     try {
       setSaveSuccess(false);
-      await profileService.updateProfile(profileId, data);
+      setSaveError(null);
+      
+      // Explicitly extract only the fields managed by this form to prevent strict ValidationPipe errors
+      const submitData = {
+        name: data.name,
+        headline: data.headline,
+        bio: data.bio,
+        currentCompany: data.currentCompany,
+        currentRole: data.currentRole,
+        email: data.email,
+        location: data.location,
+        freelanceAvailable: !!data.freelanceAvailable,
+        remoteAvailable: !!data.remoteAvailable,
+      };
+
+      await profileService.updateProfile(submitData);
+      // Reset the form with the newly saved data so that isDirty becomes false again
+      reset(submitData);
+      
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
+      setSaveError(e.message || 'Failed to save profile. Please check your inputs.');
     }
   };
 
@@ -104,10 +121,11 @@ export default function ProfileAdminPage() {
         </div>
 
         <div className="pt-6 flex items-center justify-between">
-          <div className="text-signal font-mono text-sm">
-            {saveSuccess && "Profile saved successfully!"}
+          <div>
+            {saveSuccess && <span className="text-signal font-mono text-sm">Profile saved successfully!</span>}
+            {saveError && <span className="text-alert font-mono text-sm">{saveError}</span>}
           </div>
-          <Button type="submit" variant="primary" disabled={isSubmitting}>
+          <Button type="submit" variant="primary" disabled={isSubmitting || !isDirty}>
             {isSubmitting ? 'Saving...' : 'Save Profile'}
           </Button>
         </div>

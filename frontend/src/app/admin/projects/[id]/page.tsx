@@ -19,8 +19,9 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
   const [activeTab, setActiveTab] = useState('basic');
   const [loading, setLoading] = useState(!isNew);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   
-  const { register, handleSubmit, reset, setValue, watch, formState: { isSubmitting } } = useForm<Partial<Project>>();
+  const { register, handleSubmit, reset, setValue, watch, formState: { isSubmitting, isDirty } } = useForm<any>();
 
   const thumbnail = watch('thumbnailUrl');
   const cover = watch('coverImageUrl');
@@ -30,7 +31,15 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
       const loadProject = async () => {
         try {
           const data = await projectService.getById(resolvedParams.id);
-          reset(data);
+          // Hydrate the form with the API data mapped to our UI fields
+          reset({
+            ...data,
+            content: data.caseStudy?.content || '',
+            githubUrl: data.links?.github || '',
+            demoUrl: data.links?.demo || '',
+            thumbnailUrl: data.thumbnail || '',
+            coverImageUrl: data.coverImage || '',
+          });
         } catch (e) {
           console.error(e);
         } finally {
@@ -41,19 +50,35 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
     }
   }, [resolvedParams.id, isNew, reset]);
 
-  const onSubmit = async (data: Partial<Project>) => {
+  const onSubmit = async (data: any) => {
     try {
       setSaveSuccess(false);
+      setSaveError(null);
+
+      // Cleanly map the UI fields to the exact shape the backend expects
+      const submitData = {
+        name: data.name,
+        slug: data.slug,
+        description: data.description,
+        published: !!data.published,
+        thumbnail: data.thumbnailUrl,
+        coverImage: data.coverImageUrl,
+        caseStudy: { content: data.content },
+        links: {
+          github: data.githubUrl,
+          demo: data.demoUrl,
+        }
+      };
+
       if (isNew) {
-        await projectService.create(data);
-        router.push('/admin/projects');
+        await projectService.create(submitData);
       } else {
-        await projectService.update(resolvedParams.id, data);
-        setSaveSuccess(true);
-        setTimeout(() => setSaveSuccess(false), 3000);
+        await projectService.update(resolvedParams.id, submitData);
       }
-    } catch (e) {
+      router.push('/admin/projects');
+    } catch (e: any) {
       console.error(e);
+      setSaveError(e.message || 'Failed to save project. Please check your inputs.');
     }
   };
 
@@ -74,7 +99,7 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
         </h1>
         <div className="flex items-center gap-4">
           <Button variant="outline" onClick={() => router.push('/admin/projects')}>Cancel</Button>
-          <Button variant="primary" onClick={handleSubmit(onSubmit)} disabled={isSubmitting}>
+          <Button variant="primary" onClick={handleSubmit(onSubmit)} disabled={isSubmitting || !isDirty}>
             {isSubmitting ? 'Saving...' : 'Save Project'}
           </Button>
         </div>
@@ -101,6 +126,11 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
               Project saved successfully!
             </div>
           )}
+          {saveError && (
+            <div className="mb-6 p-4 bg-alert/10 border border-alert/20 text-alert rounded font-mono text-sm">
+              {saveError}
+            </div>
+          )}
 
           <form className="space-y-6">
             <div className={activeTab === 'basic' ? 'block' : 'hidden'}>
@@ -112,6 +142,9 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
             </div>
 
             <div className={activeTab === 'content' ? 'block' : 'hidden'}>
+              <div className="mb-4 text-sm font-mono text-muted">
+                This content will be saved as your Project's Case Study.
+              </div>
               <RichTextField 
                 label="Main Content" 
                 registration={register('content')} 

@@ -45,6 +45,34 @@ export class AuthService {
     };
   }
 
+  async createAdmin(loginDto: LoginDto) {
+    const existingAdmin = await this.prisma.admin.findUnique({
+      where: { email: loginDto.email },
+    });
+
+    if (existingAdmin) {
+      throw new UnauthorizedException('Admin already exists');
+    }
+
+    const hashedPassword = await bcrypt.hash(loginDto.password, 10);
+
+    const admin = await this.prisma.admin.create({
+      data: {
+        email: loginDto.email,
+        password: hashedPassword,
+        name: 'Admin',
+      },
+    });
+
+    return {
+      message: 'Admin created successfully',
+      admin: {
+        id: admin.id,
+        email: admin.email,
+      }
+    };
+  }
+
   async validateUser(userId: string) {
     const admin = await this.prisma.admin.findUnique({
       where: { id: userId },

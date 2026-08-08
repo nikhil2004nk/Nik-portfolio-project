@@ -3,22 +3,22 @@ import { Project } from '../../../types/project';
 
 export const projectService = {
   getAll: async (): Promise<Project[]> => {
-    return api.get('/projects');
+    return api.get('/admin/projects');
   },
   
   getById: async (id: string): Promise<Project> => {
-    return api.get(`/projects/${id}`);
+    return api.get(`/admin/projects/${id}`);
   },
   
   create: async (data: Partial<Project>): Promise<Project> => {
-    return api.post('/projects', data);
+    return api.post('/admin/projects', data);
   },
   
   update: async (id: string, data: Partial<Project>): Promise<Project> => {
-    return api.patch(`/projects/${id}`, data);
+    return api.patch(`/admin/projects/${id}`, data);
   },
   
   delete: async (id: string): Promise<void> => {
-    return api.delete(`/projects/${id}`);
+    return api.delete(`/admin/projects/${id}`);
   }
 };

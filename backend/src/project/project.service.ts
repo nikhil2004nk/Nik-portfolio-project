@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { ProjectRepository } from './repository/project.repository';
 import { ProjectMapper } from './mapper/project.mapper';
+import { CreateProjectDto } from './dto/create-project.dto';
+import { UpdateProjectDto } from './dto/update-project.dto';
 
 @Injectable()
 export class ProjectService {
@@ -10,8 +12,21 @@ export class ProjectService {
     private readonly projectMapper: ProjectMapper,
   ) {}
 
-  async create(data: Prisma.ProjectCreateInput) {
-    return this.projectRepository.create(data);
+  async create(data: CreateProjectDto) {
+    const { technologyIds, categoryIds, tagIds, features, screenshots, metrics, ...baseData } = data;
+    
+    // Typecast to any to bypass strict Prisma JSON typing issues on highlights, caseStudy etc which are valid objects
+    const createPayload: Prisma.ProjectCreateInput = {
+      ...(baseData as any),
+      technologies: technologyIds ? { create: technologyIds.map(id => ({ technology: { connect: { id } } })) } : undefined,
+      categories: categoryIds ? { create: categoryIds.map(id => ({ category: { connect: { id } } })) } : undefined,
+      tags: tagIds ? { create: tagIds.map(id => ({ tag: { connect: { id } } })) } : undefined,
+      features: features ? { create: features } : undefined,
+      screenshots: screenshots ? { create: screenshots } : undefined,
+      metrics: metrics ? { create: metrics } : undefined,
+    };
+
+    return this.projectRepository.create(createPayload);
   }
 
   async findAllAdmin() {
@@ -53,56 +68,34 @@ export class ProjectService {
     return project;
   }
 
-  async update(id: string, data: Prisma.ProjectUpdateInput) {
-    // Strip read-only and relational fields that cause Prisma validation errors
-    const { 
-      id: _, 
-      createdAt, 
-      updatedAt, 
-      technologies,
-      features,
-      screenshots,
-      metrics,
-      tags,
-      categories,
-      
-      // Extract frontend-specific fields
-      name,
-      title,
-      content,
-      thumbnailUrl,
-      coverImageUrl,
-      githubUrl,
-      demoUrl,
-      
-      ...updateData 
-    } = data as any;
+  async update(id: string, data: UpdateProjectDto) {
+    const { technologyIds, categoryIds, tagIds, features, screenshots, metrics, ...baseData } = data;
     
-    // Map to Prisma fields
-    const finalName = name || title;
-    if (finalName !== undefined) updateData.name = finalName;
-    if (thumbnailUrl !== undefined) updateData.thumbnail = thumbnailUrl;
-    if (coverImageUrl !== undefined) updateData.coverImage = coverImageUrl;
-    
-    if (content !== undefined) {
-      updateData.caseStudy = { content };
+    const updatePayload: Prisma.ProjectUpdateInput = { ...(baseData as any) };
+
+    if (technologyIds) {
+      updatePayload.technologies = { deleteMany: {}, create: technologyIds.map(tid => ({ technology: { connect: { id: tid } } })) };
     }
-    
-    if (githubUrl !== undefined || demoUrl !== undefined) {
-      updateData.links = {
-        github: githubUrl || '',
-        demo: demoUrl || ''
-      };
+    if (categoryIds) {
+      updatePayload.categories = { deleteMany: {}, create: categoryIds.map(cid => ({ category: { connect: { id: cid } } })) };
     }
-    
-    return this.projectRepository.update({ id }, updateData);
+    if (tagIds) {
+      updatePayload.tags = { deleteMany: {}, create: tagIds.map(tid => ({ tag: { connect: { id: tid } } })) };
+    }
+    if (features) {
+      updatePayload.features = { deleteMany: {}, create: features };
+    }
+    if (screenshots) {
+      updatePayload.screenshots = { deleteMany: {}, create: screenshots };
+    }
+    if (metrics) {
+      updatePayload.metrics = { deleteMany: {}, create: metrics };
+    }
+
+    return this.projectRepository.update({ id }, updatePayload);
   }
 
   async remove(id: string) {
     return this.projectRepository.delete({ id });
-  }
-
-  async addFeature(projectId: string, data: any) {
-    return { projectId, ...data };
   }
 }

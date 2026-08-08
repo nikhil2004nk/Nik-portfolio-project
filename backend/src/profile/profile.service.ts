@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 
 @Injectable()
 export class ProfileService {
@@ -19,15 +20,12 @@ export class ProfileService {
     return profile;
   }
 
-  async update(data: any) {
+  async update(data: UpdateProfileDto) {
     const profile = await this.find();
-    
-    // Remove read-only fields that might be passed from the frontend form
-    const { id, createdAt, updatedAt, ...updateData } = data;
     
     return this.prisma.profile.update({
       where: { id: profile.id },
-      data: updateData,
+      data,
     });
   }
 }

@@ -1,15 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseGuards, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ProjectService } from './project.service';
-import { Prisma } from '@prisma/client';
-// import { JwtAuthGuard } from '../common/guards/jwt-auth.guard'; // Add guard later
+import { CreateProjectDto } from './dto/create-project.dto';
+import { UpdateProjectDto } from './dto/update-project.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-// @UseGuards(JwtAuthGuard)
+@ApiTags('Admin Projects')
+@UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth('JWT-auth')
 @Controller('admin/projects')
 export class AdminProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
   @Post()
-  create(@Body() createProjectDto: Prisma.ProjectCreateInput) {
+  create(@Body() createProjectDto: CreateProjectDto) {
     return this.projectService.create(createProjectDto);
   }
 
@@ -24,7 +28,7 @@ export class AdminProjectController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProjectDto: Prisma.ProjectUpdateInput) {
+  update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
     return this.projectService.update(id, updateProjectDto);
   }
 
@@ -32,12 +36,4 @@ export class AdminProjectController {
   remove(@Param('id') id: string) {
     return this.projectService.remove(id);
   }
-
-  // Nested routes for Features
-  @Post(':id/features')
-  addFeature(@Param('id') id: string, @Body() data: { title: string; description?: string; order?: number }) {
-    return this.projectService.addFeature(id, data);
-  }
-
-  // Same for screenshots, metrics, technologies...
 }

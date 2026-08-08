@@ -4,12 +4,10 @@ export interface Project extends BaseEntity {
   name: string;
   slug: string;
   description: string;
-  content: string | null;
-  thumbnailUrl: string | null;
-  coverImageUrl: string | null;
-  githubUrl: string | null;
-  demoUrl: string | null;
-  caseStudy: string | null;
+  thumbnail: string | null;
+  coverImage: string | null;
+  links: { github?: string; demo?: string } | null;
+  caseStudy: any | null;
   published: boolean;
   categories: string[];
   technologies: string[];

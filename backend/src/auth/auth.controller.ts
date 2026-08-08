@@ -24,6 +24,12 @@ export class AuthController {
     return data;
   }
 
+  @Post('register')
+  @HttpCode(HttpStatus.CREATED)
+  async register(@Body() loginDto: LoginDto) {
+    return this.authService.createAdmin(loginDto);
+  }
+
   @Post('logout')
   @HttpCode(HttpStatus.OK)
   logout(@Res({ passthrough: true }) res: Response) {

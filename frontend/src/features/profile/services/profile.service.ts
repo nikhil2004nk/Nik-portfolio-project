@@ -6,7 +6,7 @@ export const profileService = {
     return api.get('/profile');
   },
   
-  updateProfile: async (id: string, data: Partial<Profile>): Promise<Profile> => {
+  updateProfile: async (data: Partial<Profile>): Promise<Profile> => {
     return api.patch(`/profile`, data);
   }
 };
