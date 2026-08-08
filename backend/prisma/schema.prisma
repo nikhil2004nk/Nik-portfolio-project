@@ -225,7 +225,7 @@ model Project {
   name         String              @unique
   slug         String              @unique
   description  String
-  coverImage   String?
+  gallery      Json?
   thumbnail    String?
   status       ProjectStatus       @default(COMPLETED)
   featured     Boolean             @default(false)

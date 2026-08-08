@@ -62,8 +62,9 @@ export class CreateProjectDto {
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsString()
-  coverImage?: string;
+  @IsArray()
+  @IsString({ each: true })
+  gallery?: string[];
 
   @ApiPropertyOptional()
   @IsOptional()

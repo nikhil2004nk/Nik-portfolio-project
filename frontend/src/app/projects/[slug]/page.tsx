@@ -32,10 +32,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           Back to all systems
         </Link>
 
-        {(project.coverImage || project.thumbnail) && (
+        {(project.gallery?.length > 0 || project.thumbnail) && (
           <div className="w-full h-64 md:h-96 mb-12 rounded-2xl overflow-hidden border border-hairline relative">
             <ImageCarousel 
-              images={[project.coverImage, project.thumbnail].filter(Boolean)} 
+              images={[...(project.gallery || []), project.thumbnail].filter(Boolean)} 
               alt={project.name} 
             />
           </div>

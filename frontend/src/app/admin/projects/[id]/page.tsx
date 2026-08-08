@@ -11,6 +11,7 @@ import { TextField } from '../../../../components/forms/TextField';
 import { TextAreaField } from '../../../../components/forms/TextAreaField';
 import { RichTextField } from '../../../../components/forms/RichTextField';
 import { ImageUploader } from '../../../../components/upload/ImageUploader';
+import { GalleryUploader } from '../../../../components/upload/GalleryUploader';
 import { Button } from '../../../../components/ui/Button';
 
 export default function ProjectEditorPage({ params }: { params: Promise<{ id: string }> }) {
@@ -26,7 +27,7 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
   const { register, handleSubmit, reset, setValue, watch, formState: { isSubmitting, isDirty } } = useForm<any>();
 
   const thumbnail = watch('thumbnailUrl');
-  const cover = watch('coverImageUrl');
+  const gallery = watch('gallery');
 
   useEffect(() => {
     if (!isNew) {
@@ -40,7 +41,7 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
             githubUrl: data.links?.github || '',
             demoUrl: data.links?.demo || '',
             thumbnailUrl: data.thumbnail || '',
-            coverImageUrl: data.coverImage || '',
+            gallery: data.gallery || [],
           });
         } catch (e) {
           console.error(e);
@@ -64,7 +65,7 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
         description: data.description,
         published: !!data.published,
         thumbnail: data.thumbnailUrl,
-        coverImage: data.coverImageUrl,
+        gallery: data.gallery,
         caseStudy: { content: data.content },
         links: {
           github: data.githubUrl,
@@ -84,7 +85,7 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
     }
   };
 
-  const handleImageUpload = (field: 'thumbnailUrl' | 'coverImageUrl') => async (file: File) => {
+  const handleImageUpload = (field: 'thumbnailUrl') => async (file: File) => {
     // We require the project slug to be set before uploading an image so we know where to save it
     const currentSlug = watch('slug');
     if (!currentSlug) {
@@ -95,7 +96,7 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
 
     try {
       setSaveError(null);
-      setUploadingImage(field === 'thumbnailUrl' ? 'thumbnail' : 'cover');
+      setUploadingImage('thumbnail');
       
       const uploadedUrl = await uploadService.uploadProjectImage(currentSlug, file);
       setValue(field, uploadedUrl, { shouldDirty: true });
@@ -105,6 +106,16 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
     } finally {
       setUploadingImage(null);
     }
+  };
+
+  const handleGalleryUpload = async (file: File) => {
+    const currentSlug = watch('slug');
+    if (!currentSlug) {
+      setSaveError('Please enter a "Slug" in the Basic tab before uploading images.');
+      setActiveTab('basic');
+      throw new Error("Slug required");
+    }
+    return await uploadService.uploadProjectImage(currentSlug, file);
   };
 
   if (loading) return <div className="animate-pulse">Loading project...</div>;
@@ -178,11 +189,11 @@ export default function ProjectEditorPage({ params }: { params: Promise<{ id: st
                   currentImage={thumbnail}
                   isUploading={uploadingImage === 'thumbnail'}
                 />
-                <ImageUploader 
-                  label="Cover Image" 
-                  onUpload={handleImageUpload('coverImageUrl')}
-                  currentImage={cover}
-                  isUploading={uploadingImage === 'cover'}
+                <GalleryUploader 
+                  label="Project Gallery"
+                  images={gallery}
+                  onChange={(imgs) => setValue('gallery', imgs, { shouldDirty: true })}
+                  onUpload={handleGalleryUpload}
                 />
               </div>
             </div>

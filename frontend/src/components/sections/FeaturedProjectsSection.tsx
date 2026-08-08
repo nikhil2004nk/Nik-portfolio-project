@@ -70,9 +70,9 @@ export function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionPro
                   {/* Image Section */}
                   {isHeroProject ? (
                     <div className="hidden lg:block flex-1 h-full min-h-[350px] bg-ink/50 backdrop-blur-sm rounded-xl border border-hairline relative overflow-hidden group-hover:border-signal/40 transition-colors shadow-inner">
-                      {project.coverImage || project.thumbnail ? (
+                      {project.gallery?.[0] || project.thumbnail ? (
                         <img 
-                          src={(project.coverImage || project.thumbnail).startsWith('/') ? `http://localhost:4000${project.coverImage || project.thumbnail}` : (project.coverImage || project.thumbnail)} 
+                          src={(project.gallery?.[0] || project.thumbnail).startsWith('/') ? `http://localhost:4000${project.gallery?.[0] || project.thumbnail}` : (project.gallery?.[0] || project.thumbnail)} 
                           alt={project.name}
                           className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                         />
@@ -87,10 +87,10 @@ export function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionPro
                       </div>
                     </div>
                   ) : (
-                    (project.thumbnail || project.coverImage) && (
+                    (project.thumbnail || project.gallery?.[0]) && (
                       <div className="w-full h-48 mb-6 bg-ink/50 backdrop-blur-sm rounded-xl border border-hairline relative overflow-hidden group-hover:border-signal/40 transition-colors shadow-inner">
                         <img 
-                          src={(project.thumbnail || project.coverImage).startsWith('/') ? `http://localhost:4000${project.thumbnail || project.coverImage}` : (project.thumbnail || project.coverImage)} 
+                          src={(project.thumbnail || project.gallery?.[0]).startsWith('/') ? `http://localhost:4000${project.thumbnail || project.gallery?.[0]}` : (project.thumbnail || project.gallery?.[0])} 
                           alt={project.name}
                           className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                         />

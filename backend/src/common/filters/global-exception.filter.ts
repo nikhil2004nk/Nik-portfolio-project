@@ -11,6 +11,8 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
     let message = 'Internal server error';
 
+    require('fs').appendFileSync('error.log', `[${new Date().toISOString()}] ${String(exception)}\n${exception && typeof exception === 'object' && 'stack' in exception ? (exception as any).stack : ''}\n\n`);
+
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       const exceptionResponse = exception.getResponse();
@@ -21,6 +23,8 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       success: false,
       message: Array.isArray(message) ? message[0] : message,
       error: exception instanceof HttpException ? exception.name : 'InternalServerError',
+      rawError: exception instanceof Error ? exception.message : String(exception),
+      stack: exception instanceof Error ? exception.stack : undefined,
       statusCode: status,
       timestamp: new Date().toISOString(),
       path: request.url,

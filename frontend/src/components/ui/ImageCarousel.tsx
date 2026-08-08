@@ -36,7 +36,7 @@ export function ImageCarousel({ images, alt = "Project image" }: ImageCarouselPr
         <img 
           src={getFullUrl(images[0])} 
           alt={alt}
-          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+          className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-700 ease-out"
         />
       </div>
     );
@@ -51,7 +51,7 @@ export function ImageCarousel({ images, alt = "Project image" }: ImageCarouselPr
             key={index}
             src={getFullUrl(img)}
             alt={`${alt} - view ${index + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+            className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ease-in-out ${
               index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
           />

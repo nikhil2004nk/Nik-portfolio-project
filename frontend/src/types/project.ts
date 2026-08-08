@@ -5,7 +5,7 @@ export interface Project extends BaseEntity {
   slug: string;
   description: string;
   thumbnail: string | null;
-  coverImage: string | null;
+  gallery?: string[];
   links: { github?: string; demo?: string } | null;
   caseStudy: any | null;
   published: boolean;

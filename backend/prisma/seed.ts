@@ -91,7 +91,7 @@ async function main() {
       slug: 'e-commerce-platform',
       description: 'A modern, high-performance e-commerce platform built with Next.js App Router and NestJS.',
       thumbnail: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80',
-      coverImage: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=1600&q=80',
+      gallery: ['https://images.unsplash.com/photo-1557821552-17105176677c?w=1600&q=80'],
       published: true,
       links: {
         githubUrl: 'https://github.com/nikhil/ecommerce',
