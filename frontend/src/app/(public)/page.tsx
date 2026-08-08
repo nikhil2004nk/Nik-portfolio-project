@@ -5,6 +5,7 @@ import { FeaturedProjectsSection } from "../../components/sections/FeaturedProje
 import { SkillsSection } from "../../components/sections/SkillsSection";
 import { ExperienceSection } from "../../components/sections/ExperienceSection";
 import { EducationSection } from "../../components/sections/EducationSection";
+import { FreelanceProcessSection } from "../../components/sections/FreelanceProcessSection";
 import { FAQSection } from "../../components/sections/FAQSection";
 import { ContactSection } from "../../components/sections/ContactSection";
 
@@ -46,6 +47,7 @@ export default async function Home() {
       <SkillsSection skills={data.skills} />
       <ExperienceSection experience={data.experience} />
       <EducationSection education={data.education} certs={data.certifications} />
+      <FreelanceProcessSection />
       <FAQSection />
       <ContactSection />
     </>

@@ -12,7 +12,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-panel border-t border-hairline py-12 md:py-16">
+    <footer className="border-t border-hairline py-12 md:py-16">
       <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           

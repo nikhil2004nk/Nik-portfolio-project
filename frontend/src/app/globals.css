@@ -25,10 +25,12 @@
   --accent-signal: #0FA99C;
   --accent-ledger: #6D28D9;
   --accent-alert: #F43F5E;
-  --text-primary: #0F172A;
-  --text-muted: #64748B;
+  --text-primary: #020617; /* Darker slate for crisp readability */
+  --text-muted: #334155; /* Darker slate for better contrast */
   --shadow-color: rgba(0, 0, 0, 0.08);
   --glass-highlight: rgba(255, 255, 255, 0.8);
+  --grid-color: rgba(0, 0, 0, 0.05);
+  --shadow-glow: rgba(15, 169, 156, 0.4); /* Teal glow for light mode */
 }
 
 .dark {
@@ -44,6 +46,8 @@
   --text-muted: #94A3B8;
   --shadow-color: rgba(0, 0, 0, 0.5);
   --glass-highlight: rgba(255, 255, 255, 0.15);
+  --grid-color: rgba(255, 255, 255, 0.02);
+  --shadow-glow: rgba(0, 240, 255, 0.8); /* Cyan glow for dark mode */
 }
 
 body {

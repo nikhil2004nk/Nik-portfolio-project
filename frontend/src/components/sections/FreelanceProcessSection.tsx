@@ -15,7 +15,13 @@ export function FreelanceProcessSection() {
     <section id="process" className="py-16 md:py-24 lg:py-32 border-t border-hairline">
       <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-7xl">
         <ScrollReveal>
-          <h2 className="text-sm font-mono text-muted mb-12">// 08 — Freelance Process</h2>
+          <div className="flex flex-col gap-2 mb-12 md:mb-16">
+            <div className="flex items-center gap-3">
+              <div className="h-[2px] w-8 bg-signal"></div>
+              <span className="text-sm font-mono text-signal uppercase tracking-widest">// 08</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-gradient">Freelance Process</h2>
+          </div>
         </ScrollReveal>
         
         {/* Mobile / Tablet Vertical List */}

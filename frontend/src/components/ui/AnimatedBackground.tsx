@@ -13,7 +13,7 @@ export function AnimatedBackground() {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[-1] opacity-20 pointer-events-none"
+      className="fixed inset-0 z-[-1] opacity-5 dark:opacity-20 pointer-events-none"
       style={{ 
         backgroundImage: "url('/background.png')",
         backgroundSize: "100% auto",

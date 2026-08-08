@@ -12,7 +12,13 @@ export function AboutSection({ profile }: AboutSectionProps) {
     <section id="about" className="py-12 md:py-24 lg:py-32">
       <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-7xl">
         <ScrollReveal>
-          <h2 className="text-sm font-mono text-muted mb-12">// 01 — About</h2>
+          <div className="flex flex-col gap-2 mb-12 md:mb-16">
+            <div className="flex items-center gap-3">
+              <div className="h-[2px] w-8 bg-signal"></div>
+              <span className="text-sm font-mono text-signal uppercase tracking-widest">// 01</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-gradient">About Me</h2>
+          </div>
         </ScrollReveal>
         
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-24 items-start">

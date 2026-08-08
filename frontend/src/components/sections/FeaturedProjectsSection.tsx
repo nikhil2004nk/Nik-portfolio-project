@@ -28,9 +28,12 @@ export function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionPro
 
       <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-7xl relative z-10">
         <ScrollReveal>
-          <div className="flex items-center gap-4 mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary">Featured Work</h2>
-            <div className="h-px flex-1 bg-gradient-to-r from-hairline to-transparent" />
+          <div className="flex flex-col gap-2 mb-12 md:mb-16">
+            <div className="flex items-center gap-3">
+              <div className="h-[2px] w-8 bg-signal"></div>
+              <span className="text-sm font-mono text-signal uppercase tracking-widest">// 03</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-gradient">Featured Work</h2>
           </div>
         </ScrollReveal>
 
@@ -39,7 +42,7 @@ export function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionPro
             const isHeroProject = index === 0;
             return (
               <ScrollReveal key={project.id} className={isHeroProject ? "md:col-span-2 lg:col-span-3" : ""}>
-                <Card className={`glass-card p-5 md:p-6 flex flex-col h-full relative overflow-hidden group hover:-translate-y-2 hover:border-signal/50 hover:shadow-[0_8px_32px_rgba(0,240,255,0.15)] transition-all duration-500 ease-out ${isHeroProject ? 'lg:flex-row lg:items-center lg:gap-12 md:p-8 lg:p-10' : ''}`}>
+                <Card className={`glass-card p-5 md:p-6 flex flex-col h-full relative overflow-hidden group hover:-translate-y-2 hover:border-signal/50 hover:shadow-[0_8px_32px_var(--shadow-glow)] transition-all duration-500 ease-out ${isHeroProject ? 'lg:flex-row lg:items-center lg:gap-12 md:p-8 lg:p-10' : ''}`}>
                   <div className="absolute inset-0 bg-gradient-to-br from-signal/5 via-transparent to-ledger/5 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out pointer-events-none" />
 
                   <div className={`flex-1 relative z-10 ${isHeroProject ? 'lg:max-w-xl' : ''}`}>

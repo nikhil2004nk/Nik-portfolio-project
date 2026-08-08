@@ -22,9 +22,12 @@ export function ExperienceSection({ experience = [] }: ExperienceSectionProps) {
       
       <div className="container mx-auto px-4 max-w-3xl relative z-10">
         <ScrollReveal>
-          <div className="flex items-center gap-4 mb-12 md:mb-16">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-primary">Experience</h2>
-            <div className="h-px flex-1 bg-gradient-to-r from-hairline to-transparent" />
+          <div className="flex flex-col gap-2 mb-12 md:mb-16">
+            <div className="flex items-center gap-3">
+              <div className="h-[2px] w-8 bg-signal"></div>
+              <span className="text-sm font-mono text-signal uppercase tracking-widest">// 05</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-gradient">Experience</h2>
           </div>
         </ScrollReveal>
         
@@ -32,9 +35,9 @@ export function ExperienceSection({ experience = [] }: ExperienceSectionProps) {
           {displayedExperience.map((job: any, index: number) => (
             <ScrollReveal key={job.id} className="relative pl-6 md:pl-10 group">
               {/* Glowing Timeline Node */}
-              <div className="absolute -left-[9px] md:-left-[9px] top-2 w-4 h-4 rounded-full bg-ink border-2 border-signal group-hover:bg-signal group-hover:shadow-[0_0_15px_rgba(0,240,255,0.8)] transition-all duration-300" />
+              <div className="absolute -left-[9px] md:-left-[9px] top-2 w-4 h-4 rounded-full bg-ink border-2 border-signal group-hover:bg-signal group-hover:shadow-[0_0_15px_var(--shadow-glow)] transition-all duration-300" />
               
-              <div className="glass-card p-5 sm:p-6 md:p-8 hover:-translate-y-1 hover:border-signal/30 transition-all duration-300 group-hover:shadow-[0_8px_32px_rgba(0,240,255,0.05)]">
+              <div className="glass-card p-5 sm:p-6 md:p-8 hover:-translate-y-1 hover:border-signal/30 transition-all duration-300 group-hover:shadow-[0_8px_32px_var(--shadow-glow)]">
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
                   <div>
                     <h3 className="text-xl md:text-2xl font-display font-bold text-primary mb-1">{job.role}</h3>

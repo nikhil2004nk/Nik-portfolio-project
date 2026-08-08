@@ -24,9 +24,15 @@ export function FAQSection() {
   ];
 
   return (
-    <section id="faq" className="py-20 bg-panel border-t border-hairline">
+    <section id="faq" className="py-20 border-t border-hairline">
       <ScrollReveal className="container mx-auto px-4 max-w-3xl">
-        <h2 className="text-sm font-mono text-muted mb-12">// 09 — FAQ</h2>
+          <div className="flex flex-col gap-2 mb-12 md:mb-16">
+            <div className="flex items-center gap-3">
+              <div className="h-[2px] w-8 bg-signal"></div>
+              <span className="text-sm font-mono text-signal uppercase tracking-widest">// 09</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-gradient">FAQ</h2>
+          </div>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div key={index} className="border-b border-hairline pb-4 last:border-0 last:pb-0">

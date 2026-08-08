@@ -49,7 +49,7 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
       {/* Background Glowing Orbs */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-signal/20 rounded-full blur-[120px] pointer-events-none animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 translate-x-1/4 translate-y-1/4 w-[400px] h-[400px] bg-ledger/20 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[length:24px_24px] pointer-events-none opacity-20" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,var(--grid-color)_1px,transparent_1px)] bg-[length:24px_24px] pointer-events-none" />
       
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -110,7 +110,7 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
                 {/* Terminal Content */}
                 <pre className="font-mono text-sm text-primary whitespace-pre-wrap leading-loose">
                   {renderHighlightedText(typedText)}
-                  <span className="bg-signal w-1 h-4 inline-block ml-1 align-middle animate-[blink_530ms_step-end_infinite] shadow-[0_0_8px_rgba(0,240,255,0.8)]"></span>
+                  <span className="bg-signal w-1 h-4 inline-block ml-1 align-middle animate-[blink_530ms_step-end_infinite] shadow-[0_0_8px_var(--shadow-glow)]"></span>
                 </pre>
               </div>
             </div>
