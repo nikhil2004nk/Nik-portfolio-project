@@ -38,7 +38,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="min-h-screen flex items-center relative overflow-hidden bg-ink pt-16 md:pt-24 border-b border-hairline">
+    <section className="min-h-screen flex items-center relative overflow-hidden pt-20 pb-12 md:pt-24 md:pb-16 border-b border-hairline">
       {/* Background Glowing Orbs */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-signal/20 rounded-full blur-[120px] pointer-events-none animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 translate-x-1/4 translate-y-1/4 w-[400px] h-[400px] bg-ledger/20 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDelay: '2s' }} />
@@ -54,7 +54,7 @@ export function Hero() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.2 }}
             className="order-2 md:order-1"
           >
-            <div className="inline-flex items-center gap-3 mb-8 px-4 py-2 glass-panel rounded-full border border-hairline">
+            <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 glass-panel rounded-full border border-hairline">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-signal opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-signal"></span>
@@ -62,11 +62,11 @@ export function Hero() {
               <span className="font-mono text-xs tracking-widest text-primary uppercase">Available for Hire</span>
             </div>
             
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-display font-bold text-primary mb-4 tracking-tighter">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold text-primary mb-3 tracking-tighter">
               <span className="text-gradient">Nikhil</span> Kushwaha
             </h1>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-mono text-muted mb-8 font-light">Full Stack Developer</h2>
-            <p className="text-base md:text-lg text-muted max-w-lg mb-10 leading-relaxed font-light">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-mono text-muted mb-5 font-light">Full Stack Developer</h2>
+            <p className="text-sm md:text-base text-muted max-w-lg mb-8 leading-relaxed font-light">
               Crafting premium, highly-performant web applications using modern architectures. Specializing in NestJS, React, and seamless user experiences.
             </p>
             

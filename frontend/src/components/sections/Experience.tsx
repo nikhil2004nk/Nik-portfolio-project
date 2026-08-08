@@ -11,7 +11,7 @@ export function Experience({ experience = [] }: { experience: any[] }) {
   const hasMore = experience.length > initialCount;
 
   return (
-    <section id="experience" className="py-12 md:py-20 bg-ink relative overflow-hidden">
+    <section id="experience" className="py-12 md:py-20 relative overflow-hidden">
       <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-ledger/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 -translate-x-1/2" />
       
       <div className="container mx-auto px-4 max-w-3xl relative z-10">

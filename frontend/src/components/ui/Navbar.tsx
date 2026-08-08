@@ -30,13 +30,15 @@ export function Navbar() {
       
       // Simple scroll spy
       const sections = navLinks.map(link => link.href.replace('#', ''));
+      let current = '';
       for (const section of sections.reverse()) {
         const el = document.getElementById(section);
         if (el && window.scrollY >= (el.offsetTop - 150)) {
-          setActiveSection(section);
+          current = section;
           break;
         }
       }
+      setActiveSection(current);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);

@@ -4,6 +4,7 @@ import { ThemeProvider } from "../components/layout/ThemeProvider";
 import { Navbar } from "../components/ui/Navbar";
 import { Footer } from "../components/ui/Footer";
 import { ScrollToTop } from "../components/ui/ScrollToTop";
+import { AnimatedBackground } from "../components/ui/AnimatedBackground";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -35,10 +36,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} ${inter.variable} min-h-screen flex flex-col font-body antialiased`}
+        className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} ${inter.variable} min-h-screen flex flex-col font-body antialiased relative`}
         suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <AnimatedBackground />
           <Navbar />
           <main className="flex-1">
             {children}

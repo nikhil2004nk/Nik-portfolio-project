@@ -3,7 +3,7 @@ import { ScrollReveal } from '../ui/ScrollReveal';
 
 export function About() {
   return (
-    <section id="about" className="py-12 md:py-24 lg:py-32 bg-ink">
+    <section id="about" className="py-12 md:py-24 lg:py-32">
       <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-7xl">
         <ScrollReveal>
           <h2 className="text-sm font-mono text-muted mb-12">// 01 — About</h2>

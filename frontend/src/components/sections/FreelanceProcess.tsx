@@ -12,7 +12,7 @@ export function FreelanceProcess() {
   ];
 
   return (
-    <section id="process" className="py-16 md:py-24 lg:py-32 bg-ink border-t border-hairline">
+    <section id="process" className="py-16 md:py-24 lg:py-32 border-t border-hairline">
       <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-7xl">
         <ScrollReveal>
           <h2 className="text-sm font-mono text-muted mb-12">// 08 — Freelance Process</h2>

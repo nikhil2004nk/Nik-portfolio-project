@@ -15,7 +15,7 @@ export function FeaturedProjects({ projects = [] }: { projects: any[] }) {
   const hasMore = projects.length > initialCount;
 
   return (
-    <section id="projects" className="py-12 md:py-24 lg:py-32 bg-ink relative overflow-hidden">
+    <section id="projects" className="py-12 md:py-24 lg:py-32 relative overflow-hidden">
       {/* Background accents */}
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-ledger/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-signal/5 rounded-full blur-[150px] pointer-events-none" />
