@@ -8,13 +8,18 @@ export interface Project extends BaseEntity {
   gallery?: string[];
   links: { github?: string; demo?: string } | null;
   caseStudy: any | null;
+  highlights?: any | null;
+  architecture?: any | null;
+  deployment?: any | null;
+  timeline?: any | null;
+  seo?: any | null;
   published: boolean;
-  categories: string[];
-  technologies: string[];
+  categories: any[];
+  technologies: any[];
   metrics: ProjectMetric[];
   features: ProjectFeature[];
-  screenshots: ProjectScreenshot[];
-  tags: string[];
+  screenshots?: any[];
+  tags: any[];
 }
 
 export interface ProjectMetric extends BaseEntity {

@@ -20,5 +20,18 @@ export const projectService = {
   
   delete: async (id: string): Promise<void> => {
     return api.delete(`/admin/projects/${id}`);
+  },
+
+  // Taxonomies
+  getCategories: async (): Promise<any[]> => {
+    return api.get('/category');
+  },
+  
+  getTechnologies: async (): Promise<any[]> => {
+    return api.get('/technology');
+  },
+  
+  getTags: async (): Promise<any[]> => {
+    return api.get('/tag');
   }
 };

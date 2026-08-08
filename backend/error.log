@@ -1,0 +1,59 @@
+[2026-08-08T11:59:05.958Z] NotFoundException: Cannot GET /api/v1/category
+NotFoundException: Cannot GET /api/v1/category
+    at callback (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\routes-resolver.js:77:19)
+    at C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\router-proxy.js:9:23
+    at Layer.handleRequest (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:342:13)
+    at C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:297:9
+    at processParams (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:582:12)
+    at next (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:291:5)
+    at Layer.handleRequest (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\lib\layer.js:147:12)
+    at trimPrefix (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:342:13)
+    at C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:297:9
+
+[2026-08-08T11:59:06.029Z] NotFoundException: Cannot GET /api/v1/category
+NotFoundException: Cannot GET /api/v1/category
+    at callback (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\routes-resolver.js:77:19)
+    at C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\router-proxy.js:9:23
+    at Layer.handleRequest (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:342:13)
+    at C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:297:9
+    at processParams (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:582:12)
+    at next (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:291:5)
+    at Layer.handleRequest (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\lib\layer.js:147:12)
+    at trimPrefix (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:342:13)
+    at C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:297:9
+
+[2026-08-08T12:05:53.240Z] NotFoundException: Cannot GET /favicon.ico
+NotFoundException: Cannot GET /favicon.ico
+    at callback (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\routes-resolver.js:77:19)
+    at C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\router-proxy.js:9:23
+    at Layer.handleRequest (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:342:13)
+    at C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:297:9
+    at processParams (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:582:12)
+    at next (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:291:5)
+    at Layer.handleRequest (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\lib\layer.js:147:12)
+    at trimPrefix (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:342:13)
+    at C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\router\index.js:297:9
+
+[2026-08-08T12:41:35.949Z] BadRequestException: Bad Request Exception
+BadRequestException: Bad Request Exception
+    at ValidationPipe.exceptionFactory (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\common\pipes\validation.pipe.js:112:20)
+    at ValidationPipe.transform (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\common\pipes\validation.pipe.js:79:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async resolveParamValue (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\router-execution-context.js:151:23)
+    at async Promise.all (index 0)
+    at async pipesFn (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\router-execution-context.js:154:13)
+    at async C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\router-execution-context.js:37:30
+
+[2026-08-08T12:42:16.639Z] BadRequestException: Bad Request Exception
+BadRequestException: Bad Request Exception
+    at ValidationPipe.exceptionFactory (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\common\pipes\validation.pipe.js:112:20)
+    at ValidationPipe.transform (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\common\pipes\validation.pipe.js:79:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async resolveParamValue (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\router-execution-context.js:151:23)
+    at async Promise.all (index 0)
+    at async pipesFn (C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\router-execution-context.js:154:13)
+    at async C:\Users\Nik\OneDrive\Desktop\Practice project\Nik-portfolio-project\backend\node_modules\@nestjs\core\router\router-execution-context.js:37:30
+
