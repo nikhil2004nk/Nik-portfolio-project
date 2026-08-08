@@ -56,6 +56,7 @@ export default function ProjectsAdminPage() {
         columns={[
           { header: 'Name', accessor: 'name' },
           { header: 'Published', accessor: (row) => row.published ? 'Yes' : 'No' },
+          { header: 'Order', accessor: 'order' },
         ]}
         onAdd={handleAdd}
         onEdit={handleEdit}

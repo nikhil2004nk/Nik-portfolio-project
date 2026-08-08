@@ -14,6 +14,9 @@ export interface Project extends BaseEntity {
   timeline?: any | null;
   seo?: any | null;
   published: boolean;
+  featured: boolean;
+  status: string;
+  order: number;
   categories: any[];
   technologies: any[];
   metrics: ProjectMetric[];

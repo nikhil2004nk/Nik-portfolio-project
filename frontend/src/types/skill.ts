@@ -1,13 +1,14 @@
 import { BaseEntity } from './common';
 
+export type SkillLevel = 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED' | 'EXPERT';
+export type SkillCategory = 'FRONTEND' | 'BACKEND' | 'DATABASE' | 'DEVOPS' | 'CLOUD' | 'TOOL' | 'AI' | 'OTHER';
+
 export interface Skill extends BaseEntity {
   name: string;
+  level: SkillLevel;
+  category: SkillCategory | null;
   icon: string | null;
-  categoryId: string;
-  category: {
-    id: string;
-    name: string;
-  };
+  yearsOfExperience: number | null;
   order: number;
 }
 

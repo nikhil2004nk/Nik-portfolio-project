@@ -56,6 +56,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           </div>
         )}
 
+        {project.status && (
+          <div className="mb-4">
+            <Badge variant="outline" className={`text-xs uppercase tracking-wider ${
+              project.status === 'COMPLETED' ? 'border-signal text-signal bg-signal/5' : 
+              project.status === 'IN_PROGRESS' ? 'border-ledger text-ledger bg-ledger/5' : 
+              'border-muted text-muted bg-ink'
+            }`}>
+              {project.status.replace('_', ' ')}
+            </Badge>
+          </div>
+        )}
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary mb-6">{project.name}</h1>
         <p className="text-lg md:text-xl text-muted mb-8 leading-relaxed">{project.description}</p>
 

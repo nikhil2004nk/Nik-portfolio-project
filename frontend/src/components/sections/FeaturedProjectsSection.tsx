@@ -46,6 +46,17 @@ export function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionPro
                   <div className="absolute inset-0 bg-gradient-to-br from-signal/5 via-transparent to-ledger/5 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out pointer-events-none" />
 
                   <div className={`flex-1 relative z-10 ${isHeroProject ? 'lg:max-w-xl' : ''}`}>
+                    {project.status && (
+                      <div className="mb-3">
+                        <Badge variant="outline" className={`text-[10px] uppercase tracking-wider ${
+                          project.status === 'COMPLETED' ? 'border-signal text-signal bg-signal/5' : 
+                          project.status === 'IN_PROGRESS' ? 'border-ledger text-ledger bg-ledger/5' : 
+                          'border-muted text-muted bg-ink'
+                        }`}>
+                          {project.status.replace('_', ' ')}
+                        </Badge>
+                      </div>
+                    )}
                     <Link href={`/projects/${project.slug}`} className="inline-block group/link mb-4">
                       <h3 className={`font-display font-bold text-primary group-hover/link:text-transparent group-hover/link:bg-clip-text group-hover/link:bg-gradient-to-r group-hover/link:from-signal group-hover/link:to-ledger transition-all duration-300 flex items-center gap-3 ${isHeroProject ? 'text-2xl md:text-3xl lg:text-4xl' : 'text-xl md:text-2xl'}`}>
                         <FolderGit2 className="w-6 h-6 text-signal group-hover/link:text-ledger transition-colors" />

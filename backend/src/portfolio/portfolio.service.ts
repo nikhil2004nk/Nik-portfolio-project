@@ -31,7 +31,7 @@ export class PortfolioService {
       testimonials
     ] = await Promise.all([
       this.prisma.profile.findFirst(),
-      this.prisma.project.findMany({ where: { published: true } }), // Get all published for now
+      this.prisma.project.findMany({ where: { published: true }, orderBy: { order: 'asc' } }),
       this.prisma.skill.findMany({ orderBy: { order: 'asc' } }),
       this.prisma.social.findMany({ where: { visible: true }, orderBy: { order: 'asc' } }),
       this.prisma.service.findMany({ orderBy: { order: 'asc' } }),
