@@ -4,9 +4,12 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 export function AnimatedBackground() {
   const { scrollYProgress } = useScroll();
   
-  // Maps the scroll progress (0 at the top, 1 at the bottom) 
-  // to a scale value (1 to 1.25 for a 25% zoom effect)
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
+  // Keep the image consistently zoomed in so we have room to pan across it
+  const scale = 1.25; 
+  
+  // Map the scroll progress so it anchors to the left (0) when at the top,
+  // and smoothly shifts to anchor to the right (1) as the user scrolls down.
+  const originX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <motion.div
@@ -16,6 +19,7 @@ export function AnimatedBackground() {
         backgroundSize: "100% auto",
         backgroundPosition: "top center",
         originY: 0,
+        originX,
         scale
       }}
       aria-hidden="true"

@@ -61,22 +61,6 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.2 }}
             className="order-2 md:order-1"
           >
-<<<<<<< HEAD:frontend/src/components/sections/Hero.tsx
-            <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 glass-panel rounded-full border border-hairline">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-signal opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-signal"></span>
-              </span>
-              <span className="font-mono text-xs tracking-widest text-primary uppercase">Available for Hire</span>
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold text-primary mb-3 tracking-tighter">
-              <span className="text-gradient">Nikhil</span> Kushwaha
-            </h1>
-            <h2 className="text-lg sm:text-xl md:text-2xl font-mono text-muted mb-5 font-light">Full Stack Developer</h2>
-            <p className="text-sm md:text-base text-muted max-w-lg mb-8 leading-relaxed font-light">
-              Crafting premium, highly-performant web applications using modern architectures. Specializing in NestJS, React, and seamless user experiences.
-=======
             {(profile?.freelanceAvailable || profile?.remoteAvailable) && (
               <div className="inline-flex items-center gap-3 mb-8 px-4 py-2 glass-panel rounded-full border border-hairline">
                 <span className="relative flex h-2.5 w-2.5">
@@ -95,7 +79,6 @@ export function HeroSection({ profile, socials }: HeroSectionProps) {
             <h2 className="text-xl sm:text-2xl md:text-3xl font-mono text-muted mb-8 font-light">{profile?.headline || 'Full Stack Developer'}</h2>
             <p className="text-base md:text-lg text-muted max-w-lg mb-10 leading-relaxed font-light">
               {profile?.bio || 'Crafting premium, highly-performant web applications using modern architectures.'}
->>>>>>> c633f2b51fc20eb0d5e92538d8d1f06b9093156f:frontend/src/components/sections/HeroSection.tsx
             </p>
             
             <div className="flex flex-wrap gap-4">
