@@ -37,7 +37,7 @@ export default function ProjectsAdminPage() {
   };
 
   const handleDelete = async (project: Project) => {
-    if (confirm(`Are you sure you want to delete ${project.title}?`)) {
+    if (confirm(`Are you sure you want to delete ${project.name}?`)) {
       try {
         await projectService.delete(project.id);
         loadProjects();
@@ -54,7 +54,7 @@ export default function ProjectsAdminPage() {
         data={projects}
         loading={loading}
         columns={[
-          { header: 'Title', accessor: 'title' },
+          { header: 'Name', accessor: 'name' },
           { header: 'Published', accessor: (row) => row.published ? 'Yes' : 'No' },
         ]}
         onAdd={handleAdd}

@@ -46,6 +46,29 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle body scroll locking when mobile menu is open
+  React.useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
+  // Handle resizing window when mobile menu is open
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [mobileMenuOpen]);
+
   if (pathname.startsWith('/admin')) {
     return null;
   }
@@ -103,10 +126,16 @@ export function Navbar() {
 
           {/* Mobile Hamburger */}
           <button 
-            className="lg:hidden p-2 text-primary z-50 focus:outline-none focus:ring-2 focus:ring-signal rounded-md"
+            className="lg:hidden p-2 text-primary z-50 focus:outline-none focus:ring-2 focus:ring-signal rounded-md flex items-center justify-center"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <motion.div
+              initial={false}
+              animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </motion.div>
           </button>
         </div>
       </header>
@@ -119,20 +148,20 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="fixed inset-0 z-40 bg-ink/95 backdrop-blur-xl flex flex-col justify-center px-5"
+            className="fixed inset-0 z-40 bg-ink/95 backdrop-blur-xl flex flex-col pt-20 pb-4 px-4 overflow-y-auto lg:hidden"
           >
-            <nav className="flex flex-col gap-6">
+            <nav className="flex flex-col">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.name}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.06 + 0.1, duration: 0.3 }}
+                  transition={{ delay: i * 0.04 + 0.1, duration: 0.2 }}
                 >
                   <Link 
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="font-display font-bold text-4xl text-primary hover:text-signal transition-colors block"
+                    className="font-mono text-sm uppercase tracking-wide text-primary hover:text-signal transition-colors block py-2.5 border-b border-hairline/30"
                   >
                     {link.name}
                   </Link>
@@ -143,27 +172,27 @@ export function Navbar() {
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-12 flex flex-col gap-6"
+              transition={{ delay: 0.3 }}
+              className="mt-4 flex flex-col gap-3"
             >
-              <div className="flex items-center gap-3">
-                <span className="relative flex h-3 w-3">
+              <div className="flex items-center gap-2 py-1">
+                <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-signal opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-signal"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-signal"></span>
                 </span>
-                <span className="font-mono text-sm tracking-widest text-signal uppercase">Available for Freelance</span>
+                <span className="font-mono text-[10px] tracking-widest text-signal uppercase">Available for Freelance</span>
               </div>
               
-              <Link href="#contact" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="primary" className="w-full">Hire Me</Button>
+              <Link href="#contact" onClick={() => setMobileMenuOpen(false)} className="w-full">
+                <Button variant="primary" size="sm" className="w-full">Hire Me</Button>
               </Link>
               
               {mounted && (
                 <button 
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} 
-                  className="flex items-center gap-2 p-3 rounded-md bg-panel border border-hairline text-primary justify-center"
+                  className="flex items-center gap-2 p-2 rounded-md bg-panel border border-hairline text-primary justify-center transition-colors hover:bg-panel-raised text-sm font-mono"
                 >
-                  {theme === 'dark' ? <><Sun className="w-4 h-4" /> Light Mode</> : <><Moon className="w-4 h-4" /> Dark Mode</>}
+                  {theme === 'dark' ? <><Sun className="w-3.5 h-3.5" /> Light Mode</> : <><Moon className="w-3.5 h-3.5" /> Dark Mode</>}
                 </button>
               )}
             </motion.div>
